@@ -1,0 +1,245 @@
+/* CSS Reset*/
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Mobile Navigation styles */
+
+#user-info {
+    display: none;
+}
+
+.desktop {
+    display: none;
+}
+
+.mobile-nav {
+    position: -webkit-sticky; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    position: sticky;
+    right: 0; 
+    top: 0;
+}
+
+.menu-icon div {
+    text-align: right;
+    color: #0B2154;
+    font-size: 0.8em;
+}
+
+/* Style rule for hamburger menu*/
+.mobile-nav a, #logoutbtn2 {
+    color: #0B2154;
+    font-family: 'Francois One', sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+    text-decoration: none; 
+    padding: 2%;
+    display: block;
+}
+
+.mobile-nav a.menu-icon {
+    display: block;
+    color: #0B2154;
+    font-size: 2em;
+    right: 0;
+    top: 0;
+}
+
+#menu-links{
+    display: none;
+}
+
+main {
+    margin: 0.5em;
+}
+
+main h1 {
+    text-align: center;
+}
+
+h1 {
+    padding-top: 50px;
+    color: #0B2154;
+}
+
+button, #month-year {
+    padding: 8px 16px;
+    border: none;
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button.active {
+    background-color: #333;
+    color: #fff;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: #f2f2f2;
+}
+
+#month-year {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+* {
+    /* Change your font family */
+    font-family: sans-serif;
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+    background-color: #0B2154;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #0B2154;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0B2154;
+}
+
+#first-half tbody tr:hover {
+    font-weight: bold;
+    background-color: #0B2154;
+    color: #fff;
+}
+
+
+
+
+table { 
+    table-layout:fixed;
+}
+
+td { 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+@media only screen and (max-width: 480px) {
+    /* horizontal scrollbar for tables if mobile screen */
+    table {
+        overflow-x: auto;
+        display: block;
+    }
+
+}
+
+
+
+/* Media Query for Desktop Viewport */ 
+@media screen and (min-width: 700px), print {
+
+    #user-info {
+        display: block;
+    }
+
+    nav.desktop a {
+        text-decoration: none;
+        color: #fff;
+    }
+    .mobile-nav {
+        display: none;
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    header {
+        height: 50px;
+        width: 80%;
+        position: absolute;
+        top: 0;
+        text-align: right;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        border: none;
+    }
+
+    header p {
+        margin: auto;
+        padding-top: 0.5em;
+        padding-right: 1em;
+        font-size: 1.5em;
+    }
+
+    nav.desktop {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        padding-top: 1em;
+    }
+
+    div#nav {
+        background-color: #0B2154;
+        color: #fff;
+        width: 100%;
+    }
+
+    body {
+        display: grid;
+        grid-template-columns: 20% 80%;
+    }
+
+    #logout-btn {
+        display: none;
+        background-color: #fff;
+        width: 180px;
+        color: #0B2154;
+        padding: 10px;
+        cursor: pointer;
+        position: absolute;
+        top: 50px;
+        right: 0;
+    }
+
+    #logout-btn:hover {
+        background-color: #0B2154;
+        color: #fff;
+    }
+
+    #user-info {
+        cursor: pointer;
+    }
+
+}

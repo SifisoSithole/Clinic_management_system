@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<HTML lang="en">
+	<HEAD>
+		<TITLE>Sign Up</TITLE>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../static/styles/login.css">
+	<script src="../static/scripts/signup.js" defer></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script defer>
+		{{ response }}
+	</script>
+	</HEAD>
+	<BODY>
+		<DIV id="login" style="height: 400px;">			
+			<FORM id="signin" action="http://127.0.0.1:5000/signup" method="POST">
+				<H1>Sign Up</H1>
+				<INPUT type="text" name="first_name" id="fName" placeholder="First name" required>
+				<INPUT type="text" id="lName" name="last_name" placeholder="Last name" required>
+				<INPUT id="email" type="email" name="email" placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+				<INPUT type="number" name="age" placeholder="Age" required>
+				<select id='gender' name="gender">
+  					<option value="Male">Male</option>
+  					<option value="Female">Female</option>
+  					<option value="Other">Other</option>
+				</select>
+				<INPUT type="password" id="pwd" name="password" placeholder="Password" required>
+				<INPUT type="password" id="pwd2" placeholder="Password" required>
+				<INPUT type="submit" id="signbtn" value="Sign up">
+				<P>Have an account? <A href="http://127.0.0.1:5000/" id="signup">Sign In</A></P>
+			</FORM>
+
+		</DIV>
+	</BODY>
+</HTML>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../static/styles/general-styles.css">
+        <link rel="stylesheet" href="../static/styles/search.css">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="../static/scripts/search_medical.js"></script>
+        <script src="../static/scripts/logout.js" defer></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div id="nav">
+            <nav class="mobile-nav">
+                <div id="menu-links">
+                    <a href="http://127.0.0.1:5000/admin/schedule"><p>Schedule</p></a>
+                    <a href="http://127.0.0.1:5000/admin/users"><p>User</p></a>
+                    <a href="http://127.0.0.1:5000/admin/medical_records"><p>Medical Records</p></a>
+                    <a href="http://127.0.0.1:5000/admin/appointments"><p>Appointments</p></a>
+                    <button id="logout-btn2">Logout</button>
+                </div>
+
+                <a class="menu-icon">
+                    <div>&#9776;</div>
+                </a>
+            </nav>
+            <nav class="desktop">
+                <img src="../static/images/icons-user.png" alt="">
+                <h3>{{ position }}</h3>
+                <a href="http://127.0.0.1:5000/admin/schedule"><p>Schedule</p></a>
+                <a href="http://127.0.0.1:5000/admin/users"><p>User</p></a>
+                <a href="http://127.0.0.1:5000/admin/medical_records"><p>Medical Records</p></a>
+                <a href="http://127.0.0.1:5000/admin/appointments"><p>Appointments</p></a>
+            </nav>
+        </div>
+        <div id="head">
+            <header>
+                <p id="user-info">{{ first_name }} {{ last_name }}&#9662;</p>
+                <button id="logout-btn" style="display:none">Logout</button>
+            </header>
+            <main>
+                <div id="first-half">
+                    <h1>Medical Records</h1>
+                    <div id="search">
+                        <form class="example">
+                            <input id="search_string" type="text" placeholder="Search..." name="search">
+                            <button id="medical"type="button"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div id="table">
+                        <table id="tables" class="content-table">
+                        <thead>
+                            <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Doctor</th>
+                            <th>Date</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in records %}
+                            <tr id="{{ record.id }}" class="records">
+                                <td>{{ record.first_name }}</td>
+                                <td>{{ record.last_name }}</td>
+                                <td>{{ record.doctor }}</td>
+                                <td>{{ record.date }}</td>
+                                <td>{{ record.age }}</td>
+                                <td>{{ record.gender }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="second-half">
+                    <h1>Medical Record</h1>
+                    <a class="back-button" href="#">Back</a>
+                    <a class="back-button" href="#">Delete Record</a>
+                    <table class="content-table">
+                        <tr>
+                            <td>Name</td>
+                            <td class="rows"></td>
+                        </tr>
+                        <tr>
+                            <td>Surname</td>
+                            <td class="rows"></td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td class="rows"></td>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td class="rows"></td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td class="rows"></td>
+                        </tr>
+                        <tr>
+                            <td>Diagnosis</td>
+                            <td class="rows"></td>
+                        </tr>
+                        <tr>
+                            <td>Prescription</td>
+                            <td class="rows"></td>
+                        </tr>
+                        <tr>
+                            <td>Dosage</td>
+                            <td class="rows"></td>
+                        </tr>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

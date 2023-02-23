@@ -1,0 +1,375 @@
+[  {    "patient_name": "Thando Nkosi",    "age": 35,    "gender": "male",    "symptoms": [      "fever",      "cough",      "fatigue"    ],
+    "diagnosis": "influenza",
+    "prescription": [
+      {
+        "medication_name": "Tamiflu",
+        "dosage": "75mg",
+        "route": "oral",
+        "frequency": "twice daily",
+        "duration": "5 days"
+      },
+      {
+        "medication_name": "Ibuprofen",
+        "dosage": "200mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "3 days"
+      }
+    ],
+    "date": "2021-09-23"
+  },
+  {
+    "patient_name": "Jane Smith",
+    "age": 45,
+    "gender": "female",
+    "symptoms": [
+      "headache",
+      "dizziness",
+      "nausea"
+    ],
+    "diagnosis": "migraine",
+    "prescription": [
+      {
+        "medication_name": "Sumatriptan",
+        "dosage": "50mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "2 days"
+      },
+      {
+        "medication_name": "Naproxen",
+        "dosage": "500mg",
+        "route": "oral",
+        "frequency": "twice daily",
+        "duration": "5 days"
+      }
+    ],
+    "date": "2021-09-23"
+  },
+  {
+    "patient_name": "Nkosazana Dlamini",
+    "age": 50,
+    "gender": "male",
+    "symptoms": [
+      "chest pain",
+      "shortness of breath",
+      "fatigue"
+    ],
+    "diagnosis": "coronary artery disease",
+    "prescription": [
+      {
+        "medication_name": "Aspirin",
+        "dosage": "81mg",
+        "route": "oral",
+        "frequency": "once daily",
+        "duration": "indefinitely"
+      },
+      {
+        "medication_name": "Atorvastatin",
+        "dosage": "40mg",
+        "route": "oral",
+        "frequency": "once daily",
+        "duration": "indefinitely"
+      }
+    ],
+    "date": "2022-01-10"
+  },
+  {    "patient_name": "Sipho Khumalo",    "age": 24,    "gender": "female",    "symptoms": [      "sore throat",      "fever",      "body aches"    ],
+    "diagnosis": "pharyngitis",
+    "prescription": [
+      {
+        "medication_name": "Penicillin VK",
+        "dosage": "500mg",
+        "route": "oral",
+        "frequency": "four times daily",
+        "duration": "10 days"
+      },
+      {
+        "medication_name": "Acetaminophen",
+        "dosage": "500mg",
+        "route": "oral",
+        "frequency": "every 6 hours",
+        "duration": "5 days"
+      }
+    ],
+    "date": "2022-01-10"
+  },
+  {
+    "patient_name": "Lerato Mabaso",
+    "age": 60,
+    "gender": "male",
+    "symptoms": [
+      "chest pain",
+      "shortness of breath",
+      "nausea"
+    ],
+    "diagnosis": "myocardial infarction",
+    "prescription": [
+      {
+        "medication_name": "Aspirin",
+        "dosage": "325mg",
+        "route": "oral",
+        "frequency": "once daily",
+        "duration": "indefinitely"
+      },
+      {
+        "medication_name": "Nitroglycerin",
+        "dosage": "0.4mg",
+        "route": "sublingual",
+        "frequency": "as needed",
+        "duration": "3 days"
+      },
+      {
+        "medication_name": "Clopidogrel",
+        "dosage": "75mg",
+        "route": "oral",
+        "frequency": "once daily",
+        "duration": "indefinitely"
+      }
+    ],
+    "date": "2022-01-10"
+  },
+  {
+    "patient_name": "Siyabonga Ndlovu",
+    "age": 35,
+    "gender": "female",
+    "symptoms": [
+      "fatigue",
+      "weakness",
+      "dizziness"
+    ],
+    "diagnosis": "anemia",
+    "prescription": [
+      {
+        "medication_name": "Iron supplements",
+        "dosage": "325mg",
+        "route": "oral",
+        "frequency": "once daily",
+        "duration": "3 months"
+      }
+    ],
+    "date": "2022-01-10"
+  },
+  {
+    "patient_name": "Zanele Mkhize",
+    "age": 42,
+    "gender": "male",
+    "symptoms": [
+      "abdominal pain",
+      "nausea",
+      "vomiting"
+    ],
+    "diagnosis": "gastroenteritis",
+    "prescription": [
+      {
+        "medication_name": "Ondansetron",
+        "dosage": "8mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "3 days"
+      },
+      {
+        "medication_name": "Loperamide",
+        "dosage": "2mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "2 days"
+      },
+      {
+        "medication_name": "Acetaminophen",
+        "dosage": "500mg",
+        "route": "oral",
+        "frequency": "every 6 hours",
+        "duration": "5 days"
+      }
+    ],
+    "date": "2021-09-23"
+  },
+  {    "patient_name": "Thabo Khumalo",    "age": 32,    "gender": "male",    "symptoms": [      "cough",      "fever",      "fatigue"    ],
+    "diagnosis": "pneumonia",
+    "prescription": [
+      {
+        "medication_name": "Amoxicillin",
+        "dosage": "500mg",
+        "route": "oral",
+        "frequency": "three times daily",
+        "duration": "10 days"
+      },
+      {
+        "medication_name": "Ibuprofen",
+        "dosage": "400mg",
+        "route": "oral",
+        "frequency": "every 6 hours",
+        "duration": "5 days"
+      }
+    ],
+    "date": "2020-05-17"
+  },
+  {
+    "patient_name": "Nomvula Nkosi",
+    "age": 55,
+    "gender": "female",
+    "symptoms": [
+      "abdominal pain",
+      "vomiting",
+      "diarrhea"
+    ],
+    "diagnosis": "gastroenteritis",
+    "prescription": [
+      {
+        "medication_name": "Loperamide",
+        "dosage": "2mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "2 days"
+      },
+      {
+        "medication_name": "Ondansetron",
+        "dosage": "8mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "3 days"
+      }
+    ],
+    "date": "2021-09-23"
+  },
+  {
+    "patient_name": "Nomvula Nkosi",
+    "age": 55,
+    "gender": "female",
+    "symptoms": [
+      "abdominal pain",
+      "vomiting",
+      "diarrhea"
+    ],
+    "diagnosis": "gastroenteritis",
+    "prescription": [
+      {
+        "medication_name": "Loperamide",
+        "dosage": "2mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "2 days"
+      },
+      {
+        "medication_name": "Ondansetron",
+        "dosage": "8mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "3 days"
+      }
+    ],
+    "date": "2021-09-23"
+  },
+  {
+    "patient_name": "Nomvula Nkosi",
+    "age": 55,
+    "gender": "female",
+    "symptoms": [
+      "abdominal pain",
+      "vomiting",
+      "diarrhea"
+    ],
+    "diagnosis": "gastroenteritis",
+    "prescription": [
+      {
+        "medication_name": "Loperamide",
+        "dosage": "2mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "2 days"
+      },
+      {
+        "medication_name": "Ondansetron",
+        "dosage": "8mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "3 days"
+      }
+    ],
+    "date": "2021-09-23"
+  },
+  {
+    "patient_name": "Nomvula Nkosi",
+    "age": 55,
+    "gender": "female",
+    "symptoms": [
+      "abdominal pain",
+      "vomiting",
+      "diarrhea"
+    ],
+    "diagnosis": "gastroenteritis",
+    "prescription": [
+      {
+        "medication_name": "Loperamide",
+        "dosage": "2mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "2 days"
+      },
+      {
+        "medication_name": "Ondansetron",
+        "dosage": "8mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "3 days"
+      }
+    ],
+    "date": "2021-09-23"
+  },
+  {
+    "patient_name": "Bongani Moyo",
+    "age": 40,
+    "gender": "male",
+    "symptoms": [
+      "chest pain",
+      "shortness of breath",
+      "fatigue"
+    ],
+    "diagnosis": "coronary artery disease",
+    "prescription": [
+      {
+        "medication_name": "Atorvastatin",
+        "dosage": "40mg",
+        "route": "oral",
+        "frequency": "once daily",
+        "duration": "indefinitely"
+      },
+      {
+        "medication_name": "Aspirin",
+        "dosage": "81mg",
+        "route": "oral",
+        "frequency": "once daily",
+        "duration": "indefinitely"
+      },
+      {
+        "medication_name": "Metoprolol",
+        "dosage": "50mg",
+        "route": "oral",
+        "frequency": "twice daily",
+        "duration": "indefinitely"
+      }
+    ],
+    "date": "2022-01-10"
+  },
+  {
+    "patient_name": "Zanele Ngubane",
+    "age": 28,
+    "gender": "female",
+    "symptoms": [
+      "headache",
+      "dizziness",
+      "nausea"
+    ],
+    "diagnosis": "migraine",
+    "prescription": [
+      {
+        "medication_name": "Sumatriptan",
+        "dosage": "100mg",
+        "route": "oral",
+        "frequency": "as needed",
+        "duration": "3 days"
+      }
+    ],
+    "date": "2021-09-23"
+}]

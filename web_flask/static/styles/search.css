@@ -1,0 +1,99 @@
+/* Style the search field */
+form.example input[type=text] {
+  margin-left: 11%;
+  height: 28px;
+  padding: 10px;
+  margin-top: 1.5em;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-top-left-radius: 500px;
+  border-bottom-left-radius: 500px;
+  float: left;
+  width: 50%;
+  background: #f1f1f1;
+}
+
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  margin-top: 1.5em;
+  height: 50px;
+  padding: 10px;
+  background: #0B2154;
+  color: white;
+  border-top-right-radius: 500px;
+  border-bottom-right-radius: 500px;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#oval {
+  position: relative;
+  margin-left: auto;
+  width: 180px;
+  text-align: center;
+  font-size: 1.5em;
+  height: 50px;
+  color: #fff;
+  right: 0;
+  background-color: #0B2154;
+  border-radius: 500px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.date {
+  margin: 1em 0 0 0;
+  color: #0B2154;
+  border: 1px solid #0B2154;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.date:hover {
+  background-color: #0B2154;
+  color: #fff;
+  cursor: pointer;
+}
+.records {
+  cursor: pointer;
+}
+
+#oval p {
+    position: relative;
+    left: 4%;
+    top: 20%;
+}
+
+#second-half {
+  display: none;
+}
+
+.back-button {
+  display: inline-block;
+  margin-left: auto;
+  padding: 10px 20px;
+  border: 2px solid #0B2154;
+  border-radius: 5px;
+  color: #0B2154;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.back-button:hover {
+  background-color: #0B2154;
+  color: #fff;
+}

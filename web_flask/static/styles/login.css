@@ -1,0 +1,37 @@
+/* CSS Reset */
+
+
+form input, form select{
+	margin: 1em auto;
+	text-align: center;
+	display: block;
+}
+
+#signup {
+	text-decoration: none;
+	color: #0B2154;
+}
+#signbtn, #add {
+	color: #fff;
+	background-color: #0B2154;
+	width: 150px;
+	height: 30px;
+}
+
+select {
+	width: 180px;
+}
+
+#login {
+	width: 300px;
+	height: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	border: #0B2154 solid;
+	margin: 150px auto;
+	text-align: center;
+}
+
+#login h1 {
+	color: #0B2154;
+}
+

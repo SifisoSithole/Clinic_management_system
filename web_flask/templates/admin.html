@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../static/styles/general-styles.css">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="../static/scripts/calendar.js" defer></script>
+        <script src="../static/scripts/logout.js" defer></script>
+        <script src="../static/scripts/hamburger.js" defer></script>
+        <script src="../static/scripts/moment.js" defer></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+        <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+    </head>
+    <body>
+        <div id="nav">
+            <nav class="mobile-nav">
+                <div id="menu-links">
+                    <a href="http://127.0.0.1:5000/admin/schedule"><p>Schedule</p></a>
+                    <a href="http://127.0.0.1:5000/admin/users"><p>User</p></a>
+                    <a href="http://127.0.0.1:5000/admin/medical_records"><p>Medical Records</p></a>
+                    <a href="http://127.0.0.1:5000/admin/appointments"><p>Appointments</p></a>
+                    <button id="logout-btn2">Logout</button>
+                </div>
+
+                <a class="menu-icon">
+                    <div>&#9776;</div>
+                </a>
+            </nav>
+            <nav class="desktop">
+                <img src="../static/images/icons-user.png" alt="">
+                <h3>{{ position }}</h3>
+                <a href="http://127.0.0.1:5000/admin/schedule"><p>Schedule</p></a>
+                <a href="http://127.0.0.1:5000/admin/users"><p>User</p></a>
+                <a href="http://127.0.0.1:5000/admin/medical_records"><p>Medical Records</p></a>
+                <a href="http://127.0.0.1:5000/admin/appointments"><p>Appointments</p></a>
+            </nav>
+        </div>
+        <div id="head">
+            <header>
+                <p id="user-info">{{ first_name }} {{ last_name }}&#9662;</p>
+                <button id="logout-btn" style="display: none;">Logout</button>
+            </header>
+            <main>
+                <h1>Schedule</h1>
+                <button id="prev-button">Prev</button>
+                <button id="next-button">Next</button>
+                <button id="month-button" class="active">Month</button>
+                <button id="week-button">Week</button>
+                <button id="day-button">Day</button>
+                <div class="calendar-header">
+                    <span id="month-year"></span>
+                </div>
+                <div id="calendar" style="height: 600px;"></div>
+            </main>
+        </div>
+    </body>
+</html>
