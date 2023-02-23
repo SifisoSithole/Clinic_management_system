@@ -9,7 +9,10 @@ This is a web application designed to help clinics manage their appointments and
 * View and update appointment status
 * Electronic medical records management
 * Access to medical records for patients and authorized clinic staff
-### Search feature
+* Search functionality in various pages:
+    * User page: search by user id, name, surname, age, gender, or position
+    * Medical records page: search by patient id, name, surname, doctor, age, gender, or medical record id
+    * Appointments page: search by name, surname, doctor, patient id, or appointment id
 
 
 ## Installation
@@ -31,7 +34,7 @@ MYSQL_DB=
 Replace the values with your MySQL database credentials.
 
 To start the application, run the following command:
-```
+```python3
 python3 -m web_flask.app
 ```
 The application will now be running on http://localhost:3000.
