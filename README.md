@@ -13,6 +13,29 @@ This is a web application designed to help clinics manage their appointments and
     * User page: search by user id, name, surname, age, gender, or position
     * Medical records page: search by patient id, name, surname, doctor, age, gender, or medical record id
     * Appointments page: search by name, surname, doctor, patient id, or appointment id
+ 
+ ## Account Types
+This system supports four types of accounts with different levels of access and functionality:
+
+### Admin Account
+* View, create, and delete user accounts
+* View and delete medical records
+* View appointments and schedules
+
+### Doctor Account
+* Create and view medical records
+* View personal schedule
+* View appointments
+
+### Receptionist Account
+* View schedule
+* Create and delete appointments
+* Print prescriptions
+* Check in patients
+
+### Patient Account
+* View personal medical history
+* Create and delete appointments.
 
 
 ## Installation
@@ -37,6 +60,6 @@ To start the application, run the following command:
 ```python3
 python3 -m web_flask.app
 ```
-The application will now be running on http://localhost:3000.
+The application will now be running on http://localhost:5000.
 
 
