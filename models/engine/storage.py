@@ -76,7 +76,7 @@ class Storage:
             elif cls == 'Appointments':
                 result = self.__session.query(classes[cls]).filter(or_(classes[cls].first_name == str, classes[cls].last_name == str,
                                                                     classes[cls].doctor == str, classes[cls].id == str,
-                                                                    classes[cls].patient_id == str)).all()
+                                                                    classes[cls].patient_id == str, classes[cls].doctor_id == str)).all()
             elif cls == 'MedicalRecords':
                 result = self.__session.query(classes[cls]).filter(or_(classes[cls].first_name == str, classes[cls].last_name == str,
                                                                     classes[cls].id == str, classes[cls].patient_id == str, classes[cls].doctor == str,

@@ -1,5 +1,14 @@
 const url = "http://127.0.0.1:5000"
+
+function getRandomColor() {
+  // Generate a random RGB color value
+  const color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+  return color;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  let position = document.cookie.split('; ').find(row => row.startsWith('position=')).split('=')[1];
+  let id = document.cookie.split('; ').find(row => row.startsWith('user_id=')).split('=')[1];
   const Calendar = tui.Calendar;
   const container = document.getElementById('calendar');
   const options = {
@@ -111,14 +120,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('week-button').classList.remove('active');
   });
 
-
-  $.get(url + '/events', (data, status) => {
+  let search;
+  if (position === 'Admin' || position === 'Receptionist') {
+    search = url + '/events';
+  } else {
+    search = url + '/search/Appointments/' + id;
+  }
+  $.get(search, (data, status) => {
     if (status !== 'success'){
       data = [{}];
     }
     let events = [];
     let event_id = 0;
-    console.log(data[0])
     data.forEach((event) => {
       let start_date = event.date + ' ' + event.start_time + ':00';
       start_date = moment(start_date, 'DD-MM-YYYY HH:mm:ss').toDate();

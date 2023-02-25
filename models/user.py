@@ -7,6 +7,13 @@ from sqlalchemy import Column, String, UniqueConstraint, Integer, JSON
 from sqlalchemy.orm import relationship
 
 
+i = 0
+
+def mydefault():
+    global i
+    i += 1
+    return i
+
 class User(BaseModel, Base):
     """Representation of a user"""
     __tablename__ = 'users'
@@ -17,6 +24,7 @@ class User(BaseModel, Base):
     password = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False, unique=True)
     position = Column(String(128), nullable=False)
+    calendar_id = Column(Integer, default=mydefault)
     appointments = relationship('Appointments', backref='user', cascade="all, delete")
     medicalRecords = relationship('MedicalRecords', backref='user', cascade="all, delete")
     session = relationship('Session', backref='user', cascade="all, delete")

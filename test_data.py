@@ -40,7 +40,7 @@ create_user = {
 user  = User(**create_user)
 storage.new(user)
 storage.save()
-
+doctors = []
 create_user = {
     'first_name': 'Lerato',
     'last_name': 'Mashaba',
@@ -55,10 +55,29 @@ create_user = {
 user  = User(**create_user)
 storage.new(user)
 storage.save()
+doctors.append(user)
+create_user = {
+    'first_name': 'Lerato',
+    'last_name': 'Khumalo',
+    'email': 'leratokhumalo@example.com',
+    'password': 'min',
+    'age': 30,
+    'gender': 'Female',
+    'position': 'Doctor',
+}
+
+
+user  = User(**create_user)
+storage.new(user)
+storage.save()
+doctors.append(user)
 with open('medical records.json', 'r') as f:
     records = json.load(f)
 
+i = 0
 for record in records:
+    if i == 2:
+        i = 0
     name = record['patient_name'].split()[0]
     surname = record['patient_name'].split()[1]
     email = name + surname + '@sample.com'
@@ -82,9 +101,10 @@ for record in records:
         storage.save()
     create_medical = {
         'doctor_email': 'mkhawane@sample.com',
+        'doctor_id': doctors[i].id,
         'patient_id': user.id,
         'gender': user.gender,
-        'doctor': 'Dr. Mashaba',
+        'doctor': 'Dr. ' + doctors[i].last_name,
         'first_name': name,
         'last_name': surname,
         'age': user.age,
@@ -93,6 +113,7 @@ for record in records:
         'diagnosis': json.dumps(record['diagnosis']),
         'prescription': json.dumps(record['prescription'])
     }
+    i = i + 1
     medical_record = MedicalRecords(**create_medical)
     storage.new(medical_record)
     storage.save()
@@ -109,13 +130,17 @@ for user in users:
 
 length = len(users) - 1
 
+x = 0
 for appointment in appointments:
+    if x == 2:
+        x = 0
     while True:
         i = random.randint(0, length)
         if users[i].position != 'Doctor' and users[i].position != 'Admin':
             break
     user = users[i]
-    doctor = users[doctor_index]
+    doctor = doctors[x]
+    x += 1
     create_appointment = {
         'patient_id': user.id,
         'first_name': user.first_name,

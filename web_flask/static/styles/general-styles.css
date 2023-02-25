@@ -33,7 +33,7 @@ html, body{
 }
 
 /* Style rule for hamburger menu*/
-.mobile-nav a, #logoutbtn2 {
+.mobile-nav a {
     color: #0B2154;
     font-family: 'Francois One', sans-serif;
     text-align: center;
@@ -41,6 +41,17 @@ html, body{
     text-decoration: none; 
     padding: 2%;
     display: block;
+}
+
+.logout p{
+  margin-top: 16px;
+  padding: 8px;
+  background-color: #0B2154;
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
 }
 
 .mobile-nav a.menu-icon {

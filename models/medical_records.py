@@ -11,6 +11,7 @@ class MedicalRecords(BaseModel, Base):
     """Representation of a medical records"""
     __tablename__ = 'medical_records'
     doctor = Column(String(128), nullable=False)
+    doctor_id = Column(String(60), nullable=False)
     patient_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)

@@ -26,21 +26,13 @@ def submit():
                 storage.new(session)
                 session.save()
                 my_dict = user.to_dict()
-                if user.position == 'Admin':
-                    resp = make_response(render_template('admin.html', **my_dict))
-                    resp.set_cookie('id', session.id)
-                    print(my_dict)
-                    for k, v in my_dict.items():
-                        if k == 'id':
-                            k = 'user_id'
-                        if k == 'gender' or k == 'age':
-                            continue
-                        resp.set_cookie(k, v)
-                    return resp
-                if user.position == 'Doctor':
-                    return redirect('http://localhost:5000/docter/')
-                if user.position == 'Patient':
-                    return redirect('http://localhost:5000/patient/')
-                if user.position == 'Receptionist':
-                    return redirect('http://localhost:5000/Receptionist/')
+                resp = make_response(render_template('schedule.html', **my_dict))
+                resp.set_cookie('id', session.id)
+                for k, v in my_dict.items():
+                    if k == 'id':
+                        k = 'user_id'
+                    if k == 'gender' or k == 'age' or k == 'calendar_id':
+                        continue
+                    resp.set_cookie(k, v)
+                return resp
     return render_template('signin.html', id=4)

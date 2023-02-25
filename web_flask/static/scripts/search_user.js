@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('img').click((e) => {
         let image = e.currentTarget.id
         $.ajax({
-        url: "http://127.0.0.1:5000/admin/remove/User/" + image,
+        url: "http://127.0.0.1:5000/accounts/remove/User/" + image,
         method: 'DELETE',
         success: (response) => {
             if (response.result === 'deleted') {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     image.id = response[i].id;
                     image.addEventListener('click', () => {
                         $.ajax({
-                        url: "http://127.0.0.1:5000/admin/remove/User/" + image.id,
+                        url: "http://127.0.0.1:5000/accounts/remove/User/" + image.id,
                         method: 'DELETE',
                         success: (response) => {
                             if (response.result === 'deleted') {

@@ -54,7 +54,7 @@ function validatePassword() {
 
 function openPopup() {
   // Open pop up
-  popupWindow = window.open(url + "admin/newUser", "Popup", "width=600,height=700");
+  popupWindow = window.open(url + "accounts/newUser", "Popup", "width=600,height=700");
 
   // Wait for the window to finish loading before manipulating it
   popupWindow.onload = function() {
@@ -88,12 +88,11 @@ function openPopup() {
     popupWindow.close();
     // Use jQuery's $.ajax() method to send the data to the server
     $.ajax({
-      url: url + 'admin/users',
+      url: url + 'accounts/users',
       method: 'POST',
       data: formData,
       success: function(response) {
         // Handle a successful response from the server
-        console.log(response);
         if (response.result === 'exists') {
           alert("Email address already registered")
         } else if (response.result === 'failed') {
@@ -121,7 +120,7 @@ for (let i = 0; i < remove_user.length; i++) {
   remove_user[i].addEventListener('click', () => {
     let id = remove_user[i].id;
     $.ajax({
-      url: url + "admin/remove/" + id,
+      url: url + "accounts/remove/" + id,
       method: 'DELETE',
       success: (response) => {
         if (response.result === 'deleted') {
@@ -131,11 +130,9 @@ for (let i = 0; i < remove_user.length; i++) {
           // change url
           window.location.replace(url)
           alert("Access denied");
+        } else {
+          alert('Failed to delete user');
         }
-      },
-      error: function(xhr, status, error) {
-        // Handle an error response from the server
-        alert("Failed to delete user, please try again")
       }
     })
   })

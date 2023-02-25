@@ -18,3 +18,4 @@ class Appointments(BaseModel, Base):
     date = Column(Date)
     start_time = Column(Time)
     end_time = Column(Time)
+    confirmed = Column(String(60), default='false')

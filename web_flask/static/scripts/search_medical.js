@@ -15,7 +15,7 @@ function openRecords(){
                     })
                     document.getElementsByClassName('back-button')[1].addEventListener('click', () => {
                         $.ajax({
-                            url: 'http://127.0.0.1:5000/admin/remove/MedicalRecords/' + response.id,
+                            url: 'http://127.0.0.1:5000/accounts/remove/MedicalRecords/' + response.id,
                             method: 'delete',
                             success: (response) => {
                                 if (response.result === 'deleted') {
@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (string === '') {
             window.location.reload();
         }
+        let search;
         $.ajax({
             url: 'http://127.0.0.1:5000/search/MedicalRecords/' + string,
             method: 'GET',

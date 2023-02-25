@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Login blueprint"""
-from flask import render_template, request, redirect, jsonify
-from web_flask.admin import admin_app
+from flask import render_template, request, redirect, jsonify, abort
+from web_flask.accounts import accounts_app
 from models import storage
 from models.user import User
 from models.autho import auth
@@ -13,12 +13,13 @@ def create_dictionary():
     my_dict['first_name'] = request.cookies.get('first_name')
     my_dict['last_name'] = request.cookies.get('last_name')
     my_dict['position'] = request.cookies.get('position')
+    my_dict['id'] = request.cookies.get('user_id')
     return my_dict
 
-@admin_app.route('/<string:id>', strict_slashes=False)
-@admin_app.route('/schedule', strict_slashes=False)
+@accounts_app.route('/<string:id>', strict_slashes=False)
+@accounts_app.route('/schedule', strict_slashes=False)
 def admin_index(id=None):
-    """Returns admin page"""
+    """Returns page"""
     if id is None:
         id = request.cookies.get('id')
         session = auth(id)
@@ -27,12 +28,15 @@ def admin_index(id=None):
     if type(session).__name__ == 'Response':
         return session
     my_dict = create_dictionary()
-    return render_template('admin.html', **my_dict)
+    return render_template('schedule.html', **my_dict)
 
-@admin_app.route('/users', strict_slashes=False)
+@accounts_app.route('/users', strict_slashes=False)
 def get_users():
     """Get all Users"""
     id = request.cookies.get('id')
+    position = request.cookies.get('position')
+    if position != 'Admin':
+        abort(403)
     session = auth(id)
     if type(session).__name__ == 'Response':
         return session
@@ -40,10 +44,13 @@ def get_users():
     my_dict = create_dictionary()
     return render_template('user.html', **my_dict, users=users)
 
-@admin_app.route('/medical_records', strict_slashes=False)
+@accounts_app.route('/medical_records', strict_slashes=False)
 def get_medicalRecords():
     """Get all medical records"""
     id = request.cookies.get('id')
+    position = request.cookies.get('position')
+    if position not in ['Admin', 'Doctor']:
+        abort(403)
     session = auth(id)
     if type(session).__name__ == 'Response':
         return session
@@ -51,7 +58,7 @@ def get_medicalRecords():
     my_dict = create_dictionary()
     return render_template('medical_records.html', **my_dict, records=records)
 
-@admin_app.route('/appointments', strict_slashes=False)
+@accounts_app.route('/appointments', strict_slashes=False)
 def get_appointments():
     """Get all medical records"""
     id = request.cookies.get('id')
@@ -63,7 +70,19 @@ def get_appointments():
     my_dict = create_dictionary()
     return render_template('appointments.html', **my_dict, appointments=sorted_events)
 
-@admin_app.route('/newUser', strict_slashes=False)
+@accounts_app.route('/consultations', strict_slashes=False)
+def get_consultations():
+    """Get all consult"""
+    id = request.cookies.get('id')
+    session = auth(id)
+    if type(session).__name__ == 'Response':
+        return session
+    appointments = list(storage.all('Appointments').values())
+    sorted_events = sorted(appointments, key=lambda x: (x.date, x.start_time))
+    my_dict = create_dictionary()
+    return render_template('consult.html', **my_dict, appointments=sorted_events)
+
+@accounts_app.route('/newUser', strict_slashes=False)
 def new_user():
     """Return registration page"""
     id = request.cookies.get('id')
@@ -76,7 +95,7 @@ def new_user():
     return render_template('add_user.html')
 
 
-@admin_app.route('/users', methods=['POST'], strict_slashes=False)
+@accounts_app.route('/users', methods=['POST'], strict_slashes=False)
 def add_users():
     """Add user"""
     id = request.cookies.get('id')
@@ -97,21 +116,24 @@ def add_users():
             lName = request.form['last_name']
             pwd = request.form['password']
             email = request.form['email']
+            age = request.form['age']
+            gender = request.form['gender']
             position = request.form['position']
-            user = User(email=email, first_name=fName, last_name=lName, password=pwd, position=position)
+            user = User(email=email, first_name=fName, age=age, gender=gender, last_name=lName, password=pwd, position=position)
             storage.new(user)
             user.save()
             return jsonify(user.to_dict())
         except Exception:
             return jsonify({'result': 'failed'})   
 
-@admin_app.route('/remove/<string:cls>/<string:user_id>', methods=['DELETE'], strict_slashes=False)
+@accounts_app.route('/remove/<string:cls>/<string:user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(cls, user_id):
     """Delete user"""
     id = request.cookies.get('id')
     position = request.cookies.get('position')
     if position != 'Admin':
-        return jsonify({'result': "denied"})
+        if cls != 'Appointments' and position != 'Receptionist':
+            return jsonify({'result': "denied"})
     session = auth(id)
     if type(session).__name__ == 'Response':
         return session
@@ -120,3 +142,19 @@ def delete_user(cls, user_id):
         return jsonify({'result': "user doesn't exist"})
     user.delete()
     return jsonify({'result': 'deleted'})
+
+@accounts_app.route('/checkin/Appointments/<string:user_id>', methods=['POST'], strict_slashes=False)
+def checkin_user(user_id):
+    """Checkin user"""
+    id = request.cookies.get('id')
+    position = request.cookies.get('position')
+    if position != 'Receptionist':
+        return jsonify({'result': "denied"})
+    session = auth(id)
+    if type(session).__name__ == 'Response':
+        return session
+    appointment = storage.get('Appointments', user_id)
+    setattr(appointment, 'confirmed', 'true')
+    appointment.save()
+    print(appointment.to_dict())
+    return jsonify({'result': 'done'})
