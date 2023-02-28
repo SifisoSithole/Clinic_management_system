@@ -7,7 +7,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="../static/scripts/hamburger.js"></script>
-        <script src="../static/scripts/search_appointments.js"></script>
+        <script src="../static/scripts/consult.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
@@ -21,9 +21,12 @@
                     {% if position in ['Admin', 'Doctor'] %}
                         <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
                     {% endif %}
+                    {% if position == 'Receptionist' %}
+                        <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
+                    {% endif %}
                     <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
                     {% if position in ['Doctor'] %}
-                        <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consult</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consultations</p></a>
                     {% endif %}
                     <a href="http://127.0.0.1:5000/logout" class="logout"><p>Logout</p></a>
                 </div>
@@ -39,12 +42,15 @@
                 {% if position == 'Admin' %}
                     <a href="http://127.0.0.1:5000/accounts/users"><p>User</p></a>
                 {% endif %}
+                {% if position == 'Receptionist' %}
+                    <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
+                {% endif %}
                 {% if position in ['Admin', 'Doctor'] %}
                     <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
                 {% endif %}
                 <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
                 {% if position in ['Doctor'] %}
-                    <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consult</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consultations</p></a>
                 {% endif %}
             </nav>
         </div>
@@ -52,16 +58,20 @@
             <header>
                 <p id="user-info">{{ first_name }} {{ last_name }}&#9662;</p>
                 <a href="http://127.0.0.1:5000/logout" id="logout-btn" style="display: none;">Logout</a>
+                <script defer>
+                    document.getElementById('user-info').addEventListener('click', () => {
+                        let logout = document.getElementById('logout-btn');
+                        if (logout.style.display == 'none') {
+                            logout.style.display = 'block';
+                        } else {
+                            logout.style.display = 'none';
+                        }
+                    })
+                </script>
             </header>
             <main>
                 <div id="first-half">
-                    <h1>Appointments</h1>
-                    <div id="search">
-                        <form class="example">
-                            <input id="search_string" type="text" placeholder="Search..." name="search">
-                            <button id="medical"type="button"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
+                    <h1>Patients</h1>
                     <div id="table">
                         <table id="tables" class="content-table">
                         <thead>
@@ -77,9 +87,9 @@
                         <tbody>
                             {% if position == 'Doctor' %}
                                 {% for appointment in appointments %}
-                                    {% if appointment.confirmed == 'true' %}
-                                        <tr id="{{ appointment.id }}" class="records">
-                                            <td>{{ appointment.first_name }}</td>
+                                    {% if appointment.confirmed == 'true' and appointment.doctor_id == id %}
+                                        <tr id="{{ appointment.patient_id }}" class="records">
+                                            <td><span id="{{ appointment.id }}"></span>{{ appointment.first_name }}</td>
                                             <td>{{ appointment.last_name }}</td>
                                             <td>{{ appointment.doctor }}</td>
                                             <td>{{ appointment.date }}</td>
@@ -97,8 +107,9 @@
                     {% if position in ['Doctor'] %}
                         <h1>Medical history</h1>
                         <a class="back-button" href="#">Back</a>
+                        <a class="back-button" href="#">Add Record</a>
                         <div class="medical_history">
-                            <div class="date"><p></p></div>
+                            <div class="date" id="noevent"><p></p></div>
                             <table class="content-table" style="margin-top: 0; display: none;">
                                 <tr>
                                     <td>Name</td>
@@ -140,6 +151,39 @@
                         </div>
                     {% endif %}
                 </div>
+                {% if position == 'Doctor' %}
+                    <div id="third-half" style="display: none;">
+                        <h1>Add Medical Record</h1>
+                        <a class="back-button" href="#">Back</a>
+                        <a class="back-button" href="#">submit</a>
+                        <table class="content-table" id="{{ id }}">
+                            <tr>
+                                <td>Symptoms</td>
+                                <td class="rows">
+                                    <input type="text" name="symptoms" id="sysm" placeholder="Symptom">
+                                    <img src="../static/images/add-new.png" id="noevent">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Diagnosis</td>
+                                <td class="rows">
+                                    <input type="text" name="diagnosis" id="diagnosis" placeholder="Diagnosis" style="background-color: #f3f3f3;">
+                                    <img src="../static/images/add-new.png" id="noevent" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Prescription</td>
+                                <td class="rows" id="prescription">
+                                    <input type="text" name="medication_name" id="pre" placeholder="Medication Name" required>
+                                    <input type="text" name="dosage" placeholder="Dosage" required>
+                                    <input type="text" name="frequency" placeholder="Frequency" required>
+                                    <input type="text" name="duration" placeholder="Duration" required>
+                                    <img src="../static/images/add-new.png" id="noevent">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endif %}
             </main>
         </div>
     </body>

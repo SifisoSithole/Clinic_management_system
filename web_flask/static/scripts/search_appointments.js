@@ -1,11 +1,33 @@
 let position = document.cookie.split('; ').find(row => row.startsWith('position=')).split('=')[1];
+function viewTable(){
+    let div_ele = document.querySelectorAll('#second-half .date');
+    let table = document.querySelectorAll('#second-half .content-table');
+    for (let i = 0; i < table.length; i++) {
+        if (div_ele[i].id === 'event') {
+            div_ele[i].removeEventListener('click', openTable);
+            div_ele[i].id = 'noevent';
+        }
+        div_ele[i].addEventListener('click', function openTable() {
+        console.log('executed')
+        if (document.querySelector('.medical_history .date p').innerHTML !== 'No record'){
+            if (table[i].style.display === 'none') {
+                table[i].style.display = 'block';
+            } else {
+                table[i].style.display = 'none';
+            }
+        }
+        });
+        div_ele[i].id = 'event'
+    }
+}
+
 function openRecords(){
     let table_rows = document.querySelectorAll('.records');
     table_rows.forEach((table_row) => {
         table_row.addEventListener('click', () => {
             let position = document.cookie.split('; ').find(row => row.startsWith('position=')).split('=')[1];
             let url;
-            if (position == 'Receptionist') {
+            if (position === 'Receptionist' || position === 'Doctor') {
                 url = 'http://127.0.0.1:5000/search/Appointments/' + table_row.id;
             } else {
                 url = 'http://127.0.0.1:5000/search/MedicalRecords1/' + table_row.id;
@@ -20,39 +42,41 @@ function openRecords(){
                         first_half.style = 'display: block;'
                         second_half.style = 'display: none;'
                     })
-                    if (position == 'Receptionist') {
-                        document.getElementsByClassName('back-button')[1].addEventListener('click', () => {
-                            $.ajax({
-                                url: 'http://127.0.0.1:5000/accounts/remove/Appointments/' + response[0].id,
-                                method: 'delete',
-                                success: (response) => {
-                                    if (response.result === 'deleted') {
-                                        window.location.reload();
-                                        alert('Appointment record deleted');
-                                    } else if (response.result === 'denied'){
-                                        window.location.reload()
-                                        alert("Access denied");
+                    if (position === 'Receptionist' || position === 'Doctor') {
+                        if (position === 'Receptionist') {
+                            document.getElementsByClassName('back-button')[1].addEventListener('click', () => {
+                                $.ajax({
+                                    url: 'http://127.0.0.1:5000/accounts/remove/Appointments/' + response[0].id,
+                                    method: 'delete',
+                                    success: (response) => {
+                                        if (response.result === 'deleted') {
+                                            window.location.reload();
+                                            alert('Appointment record deleted');
+                                        } else if (response.result === 'denied'){
+                                            window.location.reload()
+                                            alert("Access denied");
+                                        }
                                     }
-                                }
+                                })
                             })
-                        })
-                        document.getElementsByClassName('back-button')[2].addEventListener('click', () => {
-                            $.ajax({
-                                url: 'http://127.0.0.1:5000/accounts/checkin/Appointments/' + response[0].id,
-                                method: 'post',
-                                success: (response) => {
-                                    console.log(response)
-                                    if (response.result === 'done') {
-                                        window.location.reload();
-                                        alert('Patient checked in');
-                                    } else if (response.result === 'denied'){
-                                        window.location.reload()
-                                        alert("Access denied");
+                            document.getElementsByClassName('back-button')[2].addEventListener('click', () => {
+                                $.ajax({
+                                    url: 'http://127.0.0.1:5000/accounts/checkin/Appointments/' + response[0].id,
+                                    method: 'post',
+                                    success: (response) => {
+                                        console.log(response)
+                                        if (response.result === 'done') {
+                                            window.location.reload();
+                                            alert('Patient checked in');
+                                        } else if (response.result === 'denied'){
+                                            window.location.reload()
+                                            alert("Access denied");
+                                        }
                                     }
-                                }
-                            })
+                                })
 
-                        });
+                            });
+                        }
                         let table_rows = document.getElementsByClassName('rows');
                         table_rows[0].innerHTML = response[0].first_name;
                         table_rows[1].innerHTML = response[0].last_name;
@@ -117,6 +141,7 @@ function openRecords(){
                     }
                     first_half.style = 'display: none;'
                     second_half.style = 'display: block;'
+                    viewTable()
                 },
                 error: (error) => {
                     console.log(error)
@@ -127,21 +152,6 @@ function openRecords(){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (position != 'Receptionist') {
-        let div_ele = document.querySelectorAll('#second-half .date');
-        let table = document.querySelectorAll('#second-half .content-table');
-        for (let i = 0; i < table.length; i++) {
-            div_ele[i].addEventListener('click', () => {
-                if (document.querySelector('.medical_history .date p').innerHTML !== 'No record'){
-                    if (table[i].style.display === 'none') {
-                        table[i].style.display = 'block';
-                    } else {
-                        table[i].style.display = 'none';
-                    }
-                }
-            });
-        }
-    }
     document.getElementById('medical').addEventListener('click', () => {
         $('#tables tr td').slice(0).remove();
         let string = document.getElementById('search_string').value;

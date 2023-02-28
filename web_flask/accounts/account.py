@@ -5,7 +5,10 @@ from web_flask.accounts import accounts_app
 from models import storage
 from models.user import User
 from models.autho import auth
-from datetime import datetime
+from models.medical_records import MedicalRecords
+from models.appointments import Appointments
+from datetime import datetime, date, timedelta
+import json
 
 def create_dictionary():
     """Return user information"""
@@ -35,8 +38,6 @@ def get_users():
     """Get all Users"""
     id = request.cookies.get('id')
     position = request.cookies.get('position')
-    if position != 'Admin':
-        abort(403)
     session = auth(id)
     if type(session).__name__ == 'Response':
         return session
@@ -49,7 +50,7 @@ def get_medicalRecords():
     """Get all medical records"""
     id = request.cookies.get('id')
     position = request.cookies.get('position')
-    if position not in ['Admin', 'Doctor']:
+    if position not in ['Admin', 'Doctor', 'Patient']:
         abort(403)
     session = auth(id)
     if type(session).__name__ == 'Response':
@@ -69,6 +70,49 @@ def get_appointments():
     sorted_events = sorted(appointments, key=lambda x: (x.date, x.start_time))
     my_dict = create_dictionary()
     return render_template('appointments.html', **my_dict, appointments=sorted_events)
+
+@accounts_app.route('/register_patient', strict_slashes=False)
+def register_patient():
+    """Register new patient"""
+    id = request.cookies.get('id')
+    session = auth(id)
+    if type(session).__name__ == 'Response':
+        return session
+    my_dict = create_dictionary()
+    return render_template('register_patient.html', **my_dict)
+
+@accounts_app.route('/add_appointment', methods=['POST'], strict_slashes=False)
+def add_appointment():
+    """Add new appointment"""
+    id = request.cookies.get('id')
+    session = auth(id)
+    if type(session).__name__ == 'Response':
+        return session
+    app = Appointments(**request.json)
+    app.date = datetime.strptime(app.date, '%d-%m-%Y').date()
+    app.start_time = datetime.strptime(app.start_time, '%H:%M')
+    app.end_time = app.start_time + timedelta(minutes=30)
+    storage.new(app)
+    storage.save()
+    return jsonify({'result': 'done'})
+
+@accounts_app.route('/add_record', methods=['POST'], strict_slashes=False)
+def add_record():
+    """Add new record"""
+    id = request.cookies.get('id')
+    session = auth(id)
+    if type(session).__name__ == 'Response':
+        return session
+    id = request.json['id']
+    del request.json['id']
+    print('id:', id)
+    file = MedicalRecords(**request.json)
+    file.date = date.today()
+    storage.new(file)
+    storage.save()
+    appointment = storage.get('Appointments', id)
+    appointment.delete()
+    return jsonify({'result': 'done'})
 
 @accounts_app.route('/consultations', strict_slashes=False)
 def get_consultations():
@@ -100,7 +144,7 @@ def add_users():
     """Add user"""
     id = request.cookies.get('id')
     position = request.cookies.get('position')
-    if position != 'Admin':
+    if position not in ['Admin']:
         return jsonify({'result': "denied"})
     session = auth(id)
     if type(session).__name__ == 'Response':

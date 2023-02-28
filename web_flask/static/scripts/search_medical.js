@@ -1,3 +1,4 @@
+let position = document.cookie.split('; ').find(row => row.startsWith('position=')).split('=')[1];
 function openRecords(){
     let table_rows = document.querySelectorAll('.records');
     table_rows.forEach((table_row) => {
@@ -13,28 +14,35 @@ function openRecords(){
                         first_half.style = 'display: block;'
                         second_half.style = 'display: none;'
                     })
-                    document.getElementsByClassName('back-button')[1].addEventListener('click', () => {
-                        $.ajax({
-                            url: 'http://127.0.0.1:5000/accounts/remove/MedicalRecords/' + response.id,
-                            method: 'delete',
-                            success: (response) => {
-                                if (response.result === 'deleted') {
-                                    window.location.reload();
-                                    alert('Medical record deleted');
-                                } else if (response.result === 'denied'){
-                                    window.location.replace(url)
-                                    alert("Access denied");
+                    if (position !== 'Patient') {
+                        document.getElementsByClassName('back-button')[1].addEventListener('click', () => {
+                            $.ajax({
+                                url: 'http://127.0.0.1:5000/accounts/remove/MedicalRecords/' + response.id,
+                                method: 'delete',
+                                success: (response) => {
+                                    if (response.result === 'deleted') {
+                                        window.location.reload();
+                                        alert('Medical record deleted');
+                                    } else if (response.result === 'denied'){
+                                        window.location.replace(url)
+                                        alert("Access denied");
+                                    }
                                 }
-                            }
+                            })
                         })
-                    })
+                    }
 
                     let ind_table_rows = document.querySelectorAll('.rows');
                     ind_table_rows[0].innerHTML = response.first_name;
                     ind_table_rows[1].innerHTML = response.last_name;
                     ind_table_rows[2].innerHTML = response.gender
                     ind_table_rows[3].innerHTML = response.age
-                    let symptoms = JSON.parse(response.symptoms);
+                    let symptoms;
+                    if (typeof(response.symptoms) === 'string') {
+                        symptoms = JSON.parse(response.symptoms);
+                    } else {
+                        symptoms = response.symptoms;
+                    }
                     let list = document.createElement('ul');
                     symptoms.forEach( (symptom) => {
                         let item = document.createElement('li');
@@ -42,8 +50,13 @@ function openRecords(){
                         list.appendChild(item);
                     })
                     ind_table_rows[4].appendChild(list);
-                    ind_table_rows[5].innerHTML = JSON.parse(response.diagnosis);
-                    let prescription = JSON.parse(response.prescription);
+                    ind_table_rows[5].innerHTML = response.diagnosis;
+                    let prescription;
+                    if (typeof(response.prescription) === 'string') {
+                        prescription = JSON.parse(response.prescription);
+                    } else {
+                        prescription = response.prescription;
+                    }
                     let medication_list = document.createElement('ul');
                     let dosage_list = document.createElement('ul');
                     prescription.forEach( (pre) => {

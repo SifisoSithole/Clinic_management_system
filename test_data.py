@@ -2,6 +2,7 @@ from models.user import User
 from models.medical_records import MedicalRecords
 from models.appointments import Appointments
 from models import storage
+from datetime import datetime, timedelta
 import random
 import json
 
@@ -121,6 +122,8 @@ for record in records:
 with open('appointments.json', 'r') as f:
     appointments = json.load(f)['appointments']
 
+time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '13:10', '13:40', '14:10', '14:40', '15:10', '15:40', '16:10', '16:40']
+
 users = list(storage.all('User').values())
 i = 0
 for user in users:
@@ -141,15 +144,19 @@ for appointment in appointments:
     user = users[i]
     doctor = doctors[x]
     x += 1
+    index = random.randint(0, len(time) - 1)
+    date = datetime.strptime(appointment['date'], '%Y-%m-%d').date()
+    start_time = datetime.strptime(time[index], '%H:%M')
+    end_time = start_time + timedelta(minutes=30)
     create_appointment = {
         'patient_id': user.id,
         'first_name': user.first_name,
         'last_name': user.last_name,
         'doctor': 'Dr. ' + doctor.last_name,
         'doctor_id': doctor.id,
-        'date': appointment['date'],
-        'start_time':  convert24(appointment['start_time']).split()[0],
-        'end_time': convert24(appointment['end_time']).split()[0]
+        'date': date,
+        'start_time': start_time,
+        'end_time': end_time
     }
     new_appointment = Appointments(**create_appointment)
     storage.new(new_appointment)

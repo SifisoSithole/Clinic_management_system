@@ -23,8 +23,6 @@ def search(cls, str):
     """Search strings"""
     id = request.cookies.get('id')
     position = request.cookies.get('position')
-    if position not in ['Admin', 'Doctor', 'Receptionist']:
-        return jsonify({'result': "denied"})
     session = auth(id)
     if cls == 'MedicalRecords1':
         filter = 0
@@ -55,7 +53,7 @@ def search_record(record_id):
     """Search fo record"""
     id = request.cookies.get('id')
     position = request.cookies.get('position')
-    if position not in ['Admin', 'Doctor']:
+    if position not in ['Admin', 'Doctor', 'Patient']:
         return jsonify({'result': "denied"})
     session = auth(id)
     if type(session).__name__ == 'Response':

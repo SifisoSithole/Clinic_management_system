@@ -26,7 +26,11 @@ def submit():
                 storage.new(session)
                 session.save()
                 my_dict = user.to_dict()
-                resp = make_response(render_template('schedule.html', **my_dict))
+                if user.position == 'Patient':
+                    app = storage.all('Appointments').values()
+                    resp = make_response(render_template('appointments.html', **my_dict, appointments=app))
+                else:
+                    resp = make_response(render_template('schedule.html', **my_dict))
                 resp.set_cookie('id', session.id)
                 for k, v in my_dict.items():
                     if k == 'id':

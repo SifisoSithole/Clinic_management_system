@@ -14,12 +14,21 @@
         <div id="nav">
             <nav class="mobile-nav">
                 <div id="menu-links">
+                    {% if position != 'Patient' %}
+                        <a href="http://127.0.0.1:5000/accounts/schedule"><p>Schedule</p></a>
+                    {% endif %}
                     <a href="http://127.0.0.1:5000/accounts/schedule"><p>Schedule</p></a>
                     {% if position == 'Admin' %}
                         <a href="http://127.0.0.1:5000/accounts/users"><p>User</p></a>
                     {% endif %}
+                    {% if position == 'Receptionist' %}
+                        <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
+                    {% endif %}
                     <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
                     <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
+                    {% if position == 'Patient' %}
+                        <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
+                    {% endif %}
                     {% if position in ['Doctor'] %}
                         <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consult</p></a>
                     {% endif %}
@@ -33,22 +42,29 @@
             <nav class="desktop">
                 <img src="../static/images/icons-user.png" alt="">
                 <h3>{{ position }}</h3>
-                <a href="http://127.0.0.1:5000/accounts/schedule"><p>Schedule</p></a>
+                {% if position != 'Patient' %}
+                    <a href="http://127.0.0.1:5000/accounts/schedule"><p>Schedule</p></a>
+                {% endif %}
                 {% if position == 'Admin' %}
                     <a href="http://127.0.0.1:5000/accounts/users"><p>User</p></a>
                 {% endif %}
-                {% if position == 'Doctor' or position == 'Admin' %}
-                    <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
+                {% if position == 'Receptionist' %}
+                    <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
                 {% endif %}
+                <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
                 <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
+                {% if position == 'Patient' %}
+                    <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
+                {% endif %}
                 {% if position in ['Doctor'] %}
-                    <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consult</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consultations</p></a>
                 {% endif %}
             </nav>
         </div>
         <div id="head">
             <header>
                 <p id="user-info">{{ first_name }} {{ last_name }}&#9662;</p>
+                <a href="http://127.0.0.1:5000/logout" id="logout-btn" style="display: none;">Logout</a>
                 <script defer>
                     document.getElementById('user-info').addEventListener('click', () => {
                         let logout = document.getElementById('logout-btn');
@@ -63,12 +79,21 @@
             <main>
                 <div id="first-half">
                     <h1>Medical Records</h1>
-                    <div id="search">
-                        <form class="example">
-                            <input id="search_string" type="text" placeholder="Search..." name="search">
-                            <button id="medical"type="button"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
+                    {% if position == 'Patient' %}
+                        <div id="search">
+                            <form class="example">
+                                <input id="search_string" style="display: none;" type="text" placeholder="Search..." name="search">
+                                <button id="medical"type="button" style="display: none;" disabled><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <div id="search">
+                            <form class="example">
+                                <input id="search_string" type="text" placeholder="Search..." name="search">
+                                <button id="medical"type="button"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    {% endif %}
                     <div id="table">
                         <table id="tables" class="content-table">
                         <thead>
@@ -108,6 +133,20 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
+                            {% if position == 'Patient' %}
+                                {% for record in records %}
+                                    {% if id == record.patient_id %}
+                                        <tr id="{{ record.id }}" class="records">
+                                            <td>{{ record.first_name }}</td>
+                                            <td>{{ record.last_name }}</td>
+                                            <td>{{ record.doctor }}</td>
+                                            <td>{{ record.date }}</td>
+                                            <td>{{ record.age }}</td>
+                                            <td>{{ record.gender }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </tbody>
                         </table>
                     </div>
@@ -115,7 +154,9 @@
                 <div id="second-half">
                     <h1>Medical Record</h1>
                     <a class="back-button" href="#">Back</a>
-                    <a class="back-button" href="#">Delete Record</a>
+                    {% if position != 'Patient' %}
+                        <a class="back-button" href="#">Delete Record</a>
+                    {% endif %}
                     <table class="content-table">
                         <tr>
                             <td>Name</td>

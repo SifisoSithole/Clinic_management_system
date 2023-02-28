@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Login blueprint"""
-from flask import render_template, request, Response
+from flask import render_template, request, Response, jsonify
 from web_flask.auth import signup_app
 from models.user import User
 from models import storage
@@ -64,22 +64,31 @@ def script(ids=None):
 def create_acc():
     """Returns sign up page"""
     users = storage.all("User")
+    position = request.cookies.get('position')
     email = request.form['email']
     for user in users.values():
         if email == user.email:
+            if position == 'Receptionist':
+                return jsonify({'result': 'exists'})
             ids = 3
             break
     else:
         try:
             fName = request.form['first_name']
             lName = request.form['last_name']
-            pwd = request.form['password']
-            user = User(email=email, first_name=fName, last_name=lName, password=pwd, position='Patient')
+            pwd = request.form['password']    
+            age = request.form['age']    
+            gender = request.form['gender']    
+            user = User(email=email, first_name=fName, last_name=lName, password=pwd, age=age, gender=gender, position='Patient')
             storage.new(user)
             storage.save()
             storage.reload()
             ids = 1
+            if position == 'Receptionist':
+                return jsonify({'result': 'created'})
         except Exception:
             ids = 2
+            if position == 'Recptionist':
+                return jsonify({'result': 'failed'})
             render_template('signup.html', id=ids)
     return render_template('signin.html', id=ids)

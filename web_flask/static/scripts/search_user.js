@@ -1,3 +1,4 @@
+let position = document.cookie.split('; ').find(row => row.startsWith('position=')).split('=')[1];
 document.addEventListener('DOMContentLoaded', function() {
     $('img').click((e) => {
         let image = e.currentTarget.id
@@ -31,9 +32,19 @@ document.addEventListener('DOMContentLoaded', function() {
             url: 'http://127.0.0.1:5000/search/User/' + string,
             method: 'GET',
             success: (response) => {
-                const headers = ['first_name', 'last_name', 'email', 'age', 'gender', 'position'] 
+                let headers;
+                if (position === 'Receptionist') {
+                    headers = ['first_name', 'last_name', 'email', 'age', 'gender'];
+                } else {
+                    headers = ['first_name', 'last_name', 'email', 'age', 'gender', 'position'];
+                }
                 const table = document.querySelector('table');
                 for (let i = 0; i < response.length; i++) {
+                    if (position === 'Receptionist') {
+                        if (response[i].position !== 'Patient'){
+                            continue;
+                        }
+                    }
                     let table_row = table.insertRow(1);
                     for (let x = 0; x < headers.length; x++) {
                         table_row.insertCell(x).innerHTML = response[i][headers[x]];
@@ -61,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         });
                     });
-                    table_row.insertCell(6).appendChild(image);
+                    if (position === 'Admin') {
+                        table_row.insertCell(6).appendChild(image);
+                    }
                 }
             }
         })

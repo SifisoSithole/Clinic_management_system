@@ -3,13 +3,11 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../static/styles/general-styles.css">
+        <link rel="stylesheet" href="../static/styles/search.css">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="../static/scripts/calendar.js" defer></script>
-        <script src="../static/scripts/hamburger.js" defer></script>
-        <script src="../static/scripts/moment.js" defer></script>
-        <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
-        <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+        <script src="../static/scripts/hamburger.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div id="nav">
@@ -19,16 +17,14 @@
                     {% if position == 'Admin' %}
                         <a href="http://127.0.0.1:5000/accounts/users"><p>User</p></a>
                     {% endif %}
-                    {% if position in ['Admin', 'Doctor'] %}
-                        <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
-                    {% endif %}
+                    <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
                     {% if position == 'Receptionist' %}
                         <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
                         <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
                     {% endif %}
-                    <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
                     {% if position in ['Doctor'] %}
-                        <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consultations</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consult</p></a>
                     {% endif %}
                     <a href="http://127.0.0.1:5000/logout" class="logout"><p>Logout</p></a>
                 </div>
@@ -48,7 +44,7 @@
                     <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
                     <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
                 {% endif %}
-                {% if position in ['Admin', 'Doctor'] %}
+                {% if position == 'Doctor' or position == 'Admin' %}
                     <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
                 {% endif %}
                 <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
@@ -73,16 +69,42 @@
                 </script>
             </header>
             <main>
-                <h1>Schedule</h1>
-                <button id="prev-button">Prev</button>
-                <button id="next-button">Next</button>
-                <button id="month-button" class="active">Month</button>
-                <button id="week-button">Week</button>
-                <button id="day-button">Day</button>
-                <div class="calendar-header">
-                    <span id="month-year"></span>
-                </div>
-                <div id="calendar" style="height: 600px;"></div>
+                <h1>Register New Patient</h1>
+                <form action="http://127.0.0.1:5000/signup" method="post" id="register_patient">
+                    <input type="submit" class="back-button">
+                    <table class="content-table">
+                        <tr>
+                            <td>Name</td>
+                            <td><input type="text" name="first_name" placeholder="Name" required></td>
+                        </tr>
+                        <tr>
+                            <td>Surname</td>
+                            <td><input type="text" name="last_name" placeholder="Surname" style="background-color: #f3f3f3;" required></td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <select id='gender' name="gender" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td><input type="number" name="age" placeholder="Age" style="background-color: #f3f3f3;" required></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="email" name="email" placeholder="Email" required></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="password" placeholder="Password" style="background-color: #f3f3f3;" required></td>
+                        </tr>
+                    </table>
+                </form>
             </main>
         </div>
     </body>
