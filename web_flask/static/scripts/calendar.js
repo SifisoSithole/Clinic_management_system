@@ -1,4 +1,4 @@
-const url = "http://127.0.0.1:5000"
+const url = "https://34.239.253.127"
 
 function getRandomColor() {
   // Generate a random RGB color value

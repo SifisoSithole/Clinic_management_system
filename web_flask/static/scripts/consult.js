@@ -23,7 +23,7 @@ function openRecords(){
     let table_rows = document.querySelectorAll('.records');
     table_rows.forEach((table_row) => {
         table_row.addEventListener('click', () => {
-            let url = 'http://127.0.0.1:5000/search/MedicalRecords1/' + table_row.id;
+            let url = 'https://34.239.253.127/search/MedicalRecords1/' + table_row.id;
             $.ajax({
                 url: url,
                 method: 'GET',
@@ -68,7 +68,7 @@ function openRecords(){
                             alert('Please complete the medical record before submiting')
                         } else {
                             const xhr = new XMLHttpRequest();
-                            const url = 'http://127.0.0.1:5000/accounts/add_record';
+                            const url = 'https://34.239.253.127/accounts/add_record';
 
                             xhr.open('POST', url);
                             xhr.setRequestHeader('Content-Type', 'application/json');

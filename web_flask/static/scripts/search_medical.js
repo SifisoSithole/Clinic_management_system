@@ -4,7 +4,7 @@ function openRecords(){
     table_rows.forEach((table_row) => {
         table_row.addEventListener('click', () => {
             $.ajax({
-                url: 'http://127.0.0.1:5000/search/record/' + table_row.id,
+                url: 'https://34.239.253.127/search/record/' + table_row.id,
                 method: 'GET',
                 success: (response) => {
                     $('.rows ul').remove();
@@ -17,7 +17,7 @@ function openRecords(){
                     if (position !== 'Patient') {
                         document.getElementsByClassName('back-button')[1].addEventListener('click', () => {
                             $.ajax({
-                                url: 'http://127.0.0.1:5000/accounts/remove/MedicalRecords/' + response.id,
+                                url: 'https://34.239.253.127/accounts/remove/MedicalRecords/' + response.id,
                                 method: 'delete',
                                 success: (response) => {
                                     if (response.result === 'deleted') {
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         let search;
         $.ajax({
-            url: 'http://127.0.0.1:5000/search/MedicalRecords/' + string,
+            url: 'https://34.239.253.127/search/MedicalRecords/' + string,
             method: 'GET',
             success: (response) => {
                 const headers = ['first_name', 'last_name', 'doctor', 'date', 'age', 'gender'] 
