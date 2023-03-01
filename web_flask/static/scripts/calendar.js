@@ -122,31 +122,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let search;
   if (position === 'Admin' || position === 'Receptionist') {
-    search = url + '/events';
+    search = 'https://www.healtheasehub.live/events';
   } else {
-    search = url + '/search/Appointments/' + id;
+    search = 'https://www.healtheasehub.live/search/Appointments/' + id;
   }
-  $.get(search, (data, status) => {
-    if (status !== 'success'){
-      data = [{}];
-    }
-    let events = [];
-    let event_id = 0;
-    data.forEach((event) => {
-      let start_date = event.date + ' ' + event.start_time + ':00';
-      start_date = moment(start_date, 'DD-MM-YYYY HH:mm:ss').toDate();
-      let end_date = event.date + ' ' + event.end_time + ':00';
-      end_date = moment(end_date, 'DD-MM-YYYY HH:mm:ss').toDate();
-      events.push({
-        id: event.id,
-        calendarId: '1',
-        title: 'Consult',
-        body: 'Appointment with ' + event.doctor + ' for ' + event.first_name + ' ' + event.last_name,
-        start: start_date,
-        end: end_date,
-      });
-      event_id++;   
-    });
-    calendar.createEvents(events);
+  $.ajax({
+      url: search,
+      method: 'GET', 
+      success: (data) => {
+        if (data.length === 0 ){
+          data = [{}];
+        }
+        let events = [];
+        let event_id = 0;
+        data.forEach((event) => {
+          let start_date = event.date + ' ' + event.start_time + ':00';
+          start_date = moment(start_date, 'DD-MM-YYYY HH:mm:ss').toDate();
+          let end_date = event.date + ' ' + event.end_time + ':00';
+          end_date = moment(end_date, 'DD-MM-YYYY HH:mm:ss').toDate();
+          events.push({
+            id: event.id,
+            calendarId: '1',
+            title: 'Consult',
+            body: 'Appointment with ' + event.doctor + ' for ' + event.first_name + ' ' + event.last_name,
+            start: start_date,
+            end: end_date,
+          });
+          event_id++;   
+        });
+        calendar.createEvents(events);
+      }
   });
 });
