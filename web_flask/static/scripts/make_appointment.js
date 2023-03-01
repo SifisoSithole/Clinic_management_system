@@ -5,7 +5,7 @@ function openRecords(){
     table_rows.forEach((table_row) => {
         table_row.addEventListener('click', (e) => {
             $.ajax({
-                url: 'http://127.0.0.1:5000/search/User/' + table_row.id,
+                url: 'https://healtheasehub.live/search/User/' + table_row.id,
                 method: 'GET',
                 success: (response) => {
                     appointment_rec.first_name = response[0].first_name;
@@ -23,7 +23,7 @@ function openRecords(){
     document.getElementById('doctors').addEventListener('change', (event) => {
         appointment_rec.doctor_id = event.target.value;
         $.ajax({
-            url: 'http://127.0.0.1:5000/search/Appointments/' + event.target.value,
+            url: 'https://healtheasehub.live/search/Appointments/' + event.target.value,
             method: 'GET',
             success: (response) => {
                 appointment_rec.doctor = response[0].doctor;
@@ -87,7 +87,7 @@ function openRecords(){
             document.getElementsByClassName('back-button')[0].addEventListener('click', () => {
 
                 const xhr = new XMLHttpRequest();
-                const url = 'http://127.0.0.1:5000/accounts/add_appointment';
+                const url = 'https://healtheasehub.live/accounts/add_appointment';
 
                 xhr.open('POST', url);
                 xhr.setRequestHeader('Content-Type', 'application/json');
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload();
         }
         $.ajax({
-            url: 'http://127.0.0.1:5000/search/User/' + string,
+            url: 'https://healtheasehub.live/search/User/' + string,
             method: 'GET',
             success: (response) => {
                 let headers = ['first_name', 'last_name', 'email', 'age', 'gender'];
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     });
     $.ajax({
-        url: 'http://127.0.0.1:5000/search/User/Doctor',
+        url: 'https://healtheasehub.live/search/User/Doctor',
         method: 'GET',
         success: (response) => {
             response.forEach( (doctor) => {

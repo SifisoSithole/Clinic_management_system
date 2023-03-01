@@ -24,7 +24,7 @@ function openRecords(){
     table_rows.forEach((table_row) => {
         table_row.addEventListener('click', () => {
             console.log(table_row.id)
-            let url = 'http://127.0.0.1:5000/search/MedicalRecords1/' + table_row.id;
+            let url = 'https://healtheasehub.live/search/MedicalRecords1/' + table_row.id;
             $.ajax({
                 url: url,
                 method: 'GET',
@@ -69,7 +69,7 @@ function openRecords(){
                         }
                     } else {
                         $.ajax({
-                            url: 'http://127.0.0.1:5000/accounts/get_user/' + table_row.id,
+                            url: 'https://healtheasehub.live/accounts/get_user/' + table_row.id,
                             method: 'GET',
                             success: (response) => {
                                 console.log(response)
@@ -95,7 +95,7 @@ function openRecords(){
                             alert('Please complete the medical record before submiting')
                         } else {
                             const xhr = new XMLHttpRequest();
-                            const url = 'http://127.0.0.1:5000/accounts/add_record';
+                            const url = 'https://healtheasehub.live/accounts/add_record';
 
                             xhr.open('POST', url);
                             xhr.setRequestHeader('Content-Type', 'application/json');
