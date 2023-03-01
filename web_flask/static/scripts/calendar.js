@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let search;
   if (position === 'Admin' || position === 'Receptionist') {
-    search = 'https://www.healtheasehub.live/events';
+    search = 'https://www.healtheasehub.live/accounts/events';
   } else {
     search = 'https://www.healtheasehub.live/search/Appointments/' + id;
   }

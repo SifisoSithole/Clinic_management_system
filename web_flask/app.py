@@ -16,7 +16,6 @@ app.register_blueprint(login_app, url_prefix='/')
 app.register_blueprint(logout_app, url_prefix='/logout')
 app.register_blueprint(signup_app, url_prefix='/signup')
 app.register_blueprint(accounts_app, url_prefix='/accounts')
-app.register_blueprint(calendar_app, url_prefix='/events')
 
 @app.route('/search/<string:cls>/<string:str>', methods=['GET'], strict_slashes=False)
 def search(cls, str):

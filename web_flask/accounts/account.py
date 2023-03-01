@@ -193,6 +193,21 @@ def delete_user(cls, user_id):
     user.delete()
     return jsonify({'result': 'deleted'})
 
+@accounts_app.route('/events', strict_slashes=False)
+def get_events():
+        """Return all of the events"""
+        id = request.cookies.get('id')
+        session = auth(id)
+        if type(session).__name__ == 'Response':
+            return session
+        events = list(storage.all('Appointments').values())
+        events = [event.to_dict() for event in events]
+        for res in events:
+            res['date'] = res['date'].strftime("%d-%m-%Y")
+            res['start_time'] = res['start_time'].strftime("%H:%M")
+            res['end_time'] = res['end_time'].strftime("%H:%M")
+        return jsonify(events)
+
 @accounts_app.route('/checkin/Appointments/<string:user_id>', methods=['POST'], strict_slashes=False)
 def checkin_user(user_id):
     """Checkin user"""
