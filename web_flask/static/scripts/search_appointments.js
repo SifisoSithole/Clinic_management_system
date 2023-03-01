@@ -28,9 +28,9 @@ function openRecords(){
             let position = document.cookie.split('; ').find(row => row.startsWith('position=')).split('=')[1];
             let url;
             if (position === 'Receptionist' || position === 'Doctor') {
-                url = 'https://34.239.253.127/search/Appointments/' + table_row.id;
+                url = 'http://127.0.0.1:5000/search/Appointments/' + table_row.id;
             } else {
-                url = 'https://34.239.253.127/search/MedicalRecords1/' + table_row.id;
+                url = 'http://127.0.0.1:5000/search/MedicalRecords1/' + table_row.id;
             }
             $.ajax({
                 url: url,
@@ -46,7 +46,7 @@ function openRecords(){
                         if (position === 'Receptionist') {
                             document.getElementsByClassName('back-button')[1].addEventListener('click', () => {
                                 $.ajax({
-                                    url: 'https://34.239.253.127/accounts/remove/Appointments/' + response[0].id,
+                                    url: 'http://127.0.0.1:5000/accounts/remove/Appointments/' + response[0].id,
                                     method: 'delete',
                                     success: (response) => {
                                         if (response.result === 'deleted') {
@@ -61,7 +61,7 @@ function openRecords(){
                             })
                             document.getElementsByClassName('back-button')[2].addEventListener('click', () => {
                                 $.ajax({
-                                    url: 'https://34.239.253.127/accounts/checkin/Appointments/' + response[0].id,
+                                    url: 'http://127.0.0.1:5000/accounts/checkin/Appointments/' + response[0].id,
                                     method: 'post',
                                     success: (response) => {
                                         console.log(response)
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload();
         }
         $.ajax({
-            url: 'https://34.239.253.127/search/Appointments/' + string,
+            url: 'http://127.0.0.1:5000/search/Appointments/' + string,
             method: 'GET',
             success: (response) => {
                 const headers = ['first_name', 'last_name', 'doctor', 'date', 'start_time', 'end_time'] 

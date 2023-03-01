@@ -6,17 +6,17 @@
         <link rel="stylesheet" href="../static/styles/login.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="../static/scripts/signin.js" defer></script>
-	<script src="https://34.239.253.127/signup/script/{{ id }}" defer>
+	<script src="http://localhost:5000/signup/script/{{ id }}" defer>
 	</script>
 	</HEAD>
 	<BODY>
 		<DIV id="login">			
-			<FORM id="signin" action="https://34.239.253.127/" method="POST">
+			<FORM id="signin" action="http://127.0.0.1:5000/" method="POST">
 				<H1>Sign In</H1>
 				<INPUT id="email" type="email" name="email" placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
 				<INPUT id="pwd" type="password" name="password" placeholder="Password" required>
 				<INPUT type="submit" id="signbtn" value="Sign In">
-				<P>Don't have an account? <A href="https://34.239.253.127/signup" id="signup">Sign up</A></P>
+				<P>Don't have an account? <A href="http://127.0.0.1:5000/signup" id="signup">Sign up</A></P>
 			</FORM>
 
 		</DIV>

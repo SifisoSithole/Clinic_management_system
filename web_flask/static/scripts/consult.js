@@ -23,11 +23,13 @@ function openRecords(){
     let table_rows = document.querySelectorAll('.records');
     table_rows.forEach((table_row) => {
         table_row.addEventListener('click', () => {
-            let url = 'https://34.239.253.127/search/MedicalRecords1/' + table_row.id;
+            console.log(table_row.id)
+            let url = 'http://127.0.0.1:5000/search/MedicalRecords1/' + table_row.id;
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: (response) => {
+                    console.log(response)
                     let first_half = document.getElementById('first-half');
                     let second_half = document.getElementById('second-half');
                     let third_half = document.getElementById('third-half');
@@ -50,25 +52,50 @@ function openRecords(){
                     doc_name = doc_name.innerHTML.split(' ')
                     doc_name = doc_name[1].slice(0, doc_name[1].length - 1)
                     let app_id = table_row.childNodes[1].childNodes[0].id;
-                    let record = {
-                        'id': app_id,
-                        'patient_id': response[0].patient_id,
-                        'first_name': response[0].first_name,
-                        'last_name': response[0].last_name,
-                        'doctor': 'Dr. ' + doc_name,
-                        'age': response[0].age,
-                        'gender': response[0].gender,
-                        'doctor_id': doc_id,
-                        'symptoms': [],
-                        'diagnosis': "",
-                        'prescription': []
+                    let record;
+                    if (response.length > 0){
+                        record = {
+                            'id': app_id,
+                            'patient_id': response[0].patient_id,
+                            'first_name': response[0].first_name,
+                            'last_name': response[0].last_name,
+                            'doctor': 'Dr. ' + doc_name,
+                            'age': response[0].age,
+                            'gender': response[0].gender,
+                            'doctor_id': doc_id,
+                            'symptoms': [],
+                            'diagnosis': "",
+                            'prescription': []
+                        }
+                    } else {
+                        $.ajax({
+                            url: 'http://127.0.0.1:5000/accounts/get_user/' + table_row.id,
+                            method: 'GET',
+                            success: (response) => {
+                                console.log(response)
+                                record = {
+                                    'id': app_id,
+                                    'patient_id': response.id,
+                                    'first_name': response.first_name,
+                                    'last_name': response.last_name,
+                                    'doctor': 'Dr. ' + doc_name,
+                                    'age': response.age,
+                                    'gender': response.gender,
+                                    'doctor_id': doc_id,
+                                    'symptoms': [],
+                                    'diagnosis': "",
+                                    'prescription': []
+                                }
+                            }
+                        });
+
                     }
                     document.getElementsByClassName('back-button')[3].addEventListener('click', () => {
                         if (validator.includes('0')){
                             alert('Please complete the medical record before submiting')
                         } else {
                             const xhr = new XMLHttpRequest();
-                            const url = 'https://34.239.253.127/accounts/add_record';
+                            const url = 'http://127.0.0.1:5000/accounts/add_record';
 
                             xhr.open('POST', url);
                             xhr.setRequestHeader('Content-Type', 'application/json');

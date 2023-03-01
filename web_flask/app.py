@@ -33,6 +33,7 @@ def search(cls, str):
         return session
     result = storage.search(cls, str)
     result = [obj.to_dict() for obj in result]
+    print(result)
     if cls == 'Appointments':
         result = sorted(result, key=lambda x: (x["date"], x["start_time"]))
         for res in result:

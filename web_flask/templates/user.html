@@ -5,8 +5,10 @@
         <link rel="stylesheet" href="../static/styles/general-styles.css">
         <link rel="stylesheet" href="../static/styles/search.css">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="../static/scripts/create_user.js" defer></script>
-        <script src="../static/scripts/search_user.js" defer></script>
+        {% if position == 'Admin' %}
+            <script src="../static/scripts/create_user.js" defer></script>
+            <script src="../static/scripts/search_user.js" defer></script>
+        {% endif %}
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         {% if position == 'Receptionist' %}
             <script src="../static/scripts/make_appointment.js"></script>
@@ -22,24 +24,24 @@
             <nav class="mobile-nav">
                 <div id="menu-links">
                     {% if position != 'Patient' %}
-                        <a href="https://34.239.253.127/accounts/schedule"><p>Schedule</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/schedule"><p>Schedule</p></a>
                     {% endif %}
                     {% if position == 'Admin' %}
-                        <a href="https://34.239.253.127/accounts/users"><p>User</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/users"><p>User</p></a>
                     {% endif %}
-                    <a href="https://34.239.253.127/accounts/medical_records"><p>Medical Records</p></a>
-                    <a href="https://34.239.253.127/accounts/appointments"><p>Appointments</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
                     {% if position == 'Patient' %}
-                        <a href="https://34.239.253.127/accounts/users"><p>Make Appointment</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
                     {% endif %}
                     {% if position == 'Receptionist' %}
-                        <a href="https://34.239.253.127/accounts/users"><p>Make Appointment</p></a>
-                        <a href="https://34.239.253.127/accounts/register_patient"><p>Register Patient</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
                     {% endif %}
                     {% if position in ['Doctor'] %}
-                        <a href="https://34.239.253.127/accounts/consultations"><p>Consult</p></a>
+                        <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consult</p></a>
                     {% endif %}
-                    <a href="https://34.239.253.127/logout" class="logout"><p>Logout</p></a>
+                    <a href="http://127.0.0.1:5000/logout" class="logout"><p>Logout</p></a>
                 </div>
 
                 <a class="menu-icon">
@@ -50,31 +52,31 @@
                 <img src="../static/images/icons-user.png" alt="">
                 <h3>{{ position }}</h3>
                 {% if position != 'Patient' %}
-                    <a href="https://34.239.253.127/accounts/schedule"><p>Schedule</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/schedule"><p>Schedule</p></a>
                 {% endif %}
                 {% if position == 'Admin' %}
-                    <a href="https://34.239.253.127/accounts/users"><p>User</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/users"><p>User</p></a>
                 {% endif %}
                 {% if position == 'Receptionist' %}
-                    <a href="https://34.239.253.127/accounts/users"><p>Make Appointment</p></a>
-                    <a href="https://34.239.253.127/accounts/register_patient"><p>Register Patient</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/register_patient"><p>Register Patient</p></a>
                 {% endif %}
                 {% if position == 'Doctor' or position == 'Admin' or position == 'Patient' %}
-                    <a href="https://34.239.253.127/accounts/medical_records"><p>Medical Records</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/medical_records"><p>Medical Records</p></a>
                 {% endif %}
-                <a href="https://34.239.253.127/accounts/appointments"><p>Appointments</p></a>
+                <a href="http://127.0.0.1:5000/accounts/appointments"><p>Appointments</p></a>
                 {% if position == 'Patient' %}
-                    <a href="https://34.239.253.127/accounts/users"><p>Make Appointment</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/users"><p>Make Appointment</p></a>
                 {% endif %}
                 {% if position in ['Doctor'] %}
-                    <a href="https://34.239.253.127/accounts/consultations"><p>Consultations</p></a>
+                    <a href="http://127.0.0.1:5000/accounts/consultations"><p>Consultations</p></a>
                 {% endif %}
             </nav>
         </div>
         <div id="head">
             <header>
                 <p id="user-info">{{ first_name }} {{ last_name }}&#9662;</p>
-                <a href="https://34.239.253.127/logout" id="logout-btn" style="display: none;">Logout</a>
+                <a href="http://127.0.0.1:5000/logout" id="logout-btn" style="display: none;">Logout</a>
                 <script defer>
                     document.getElementById('user-info').addEventListener('click', () => {
                         let logout = document.getElementById('logout-btn');

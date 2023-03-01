@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('img').click((e) => {
         let image = e.currentTarget.id
         $.ajax({
-        url: "https://34.239.253.127/accounts/remove/User/" + image,
+        url: "http://127.0.0.1:5000/accounts/remove/User/" + image,
         method: 'DELETE',
         success: (response) => {
             if (response.result === 'deleted') {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload();
         }
         $.ajax({
-            url: 'https://34.239.253.127/search/User/' + string,
+            url: 'http://127.0.0.1:5000/search/User/' + string,
             method: 'GET',
             success: (response) => {
                 let headers;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     image.id = response[i].id;
                     image.addEventListener('click', () => {
                         $.ajax({
-                        url: "https://34.239.253.127/accounts/remove/User/" + image.id,
+                        url: "http://127.0.0.1:5000/accounts/remove/User/" + image.id,
                         method: 'DELETE',
                         success: (response) => {
                             if (response.result === 'deleted') {

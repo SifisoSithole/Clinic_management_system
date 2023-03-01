@@ -126,6 +126,15 @@ def get_consultations():
     my_dict = create_dictionary()
     return render_template('consult.html', **my_dict, appointments=sorted_events)
 
+@accounts_app.route('/get_user/<string:user_id>', strict_slashes=False)
+def get_user(user_id):
+    """Return user"""
+    id = request.cookies.get('id')
+    position = request.cookies.get('position')
+    session = auth(id)
+    userd = storage.get('User', user_id)
+    return jsonify(userd.to_dict())
+
 @accounts_app.route('/newUser', strict_slashes=False)
 def new_user():
     """Return registration page"""
@@ -175,9 +184,6 @@ def delete_user(cls, user_id):
     """Delete user"""
     id = request.cookies.get('id')
     position = request.cookies.get('position')
-    if position != 'Admin':
-        if cls != 'Appointments' and position != 'Receptionist':
-            return jsonify({'result': "denied"})
     session = auth(id)
     if type(session).__name__ == 'Response':
         return session
