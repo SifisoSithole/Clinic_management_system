@@ -1,5 +1,5 @@
 let popupWindow;
-const url = "https://healtheasehub.live/"
+const url = "https://www.healtheasehub.live/"
 
 // Validate name field
 function validateName() {
