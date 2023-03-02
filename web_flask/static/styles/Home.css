@@ -1,5 +1,5 @@
  .u-section-1 {
-  background-image: url("images/doctor-looking-information-database.jpg");
+  background-image: url("../images/doctor-looking-information-database.jpg");
   background-position: 50% 0%;
 }
 
@@ -427,7 +427,7 @@
 
 .u-section-4 .u-image-3 {
   min-height: 766px;
-  background-image: url("images/front-view-doctor-wearing-white-coat.jpg");
+  background-image: url("../images/front-view-doctor-wearing-white-coat.jpg");
   background-position: 50% 50%;
 }
 
