@@ -7,7 +7,6 @@ from models.autho import auth
 from web_flask.auth import signup_app
 from web_flask.auth import logout_app
 from web_flask.accounts import accounts_app
-from web_flask.calendar import calendar_app
 from datetime import datetime
 from flask import Flask, make_response, jsonify, request
 

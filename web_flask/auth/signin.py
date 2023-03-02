@@ -6,11 +6,14 @@ from models import storage
 from models.session import Session
 
 @login_app.route('/signin', strict_slashes=False)
-@login_app.route('/', strict_slashes=False)
 def login():
     """Returns login page"""
     return render_template('signin.html', id=None)
 
+@login_app.route('/', strict_slashes=False)
+def get_landing_page():
+    """Returns landing page"""
+    return render_template('../landing_page/Home.html')
 
 @login_app.route('/signin', methods=['POST'], strict_slashes=False, )
 @login_app.route('/', methods=['POST'], strict_slashes=False)
