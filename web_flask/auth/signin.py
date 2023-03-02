@@ -13,7 +13,7 @@ def login():
 @login_app.route('/', strict_slashes=False)
 def get_landing_page():
     """Returns landing page"""
-    return render_template('../landing_page/Home.html')
+    return render_template('Home.html')
 
 @login_app.route('/signin', methods=['POST'], strict_slashes=False, )
 @login_app.route('/', methods=['POST'], strict_slashes=False)
