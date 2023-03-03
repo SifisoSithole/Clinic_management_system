@@ -2,9 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        {% if position == 'Receptionist' %}
+            <title>Make Appointment</title>
+        {% endif %}
+        {% if position == 'Admin' %}
+            <title>Users</title>
+        {% endif %}
         <link rel="stylesheet" href="../static/styles/general-styles.css">
         <link rel="stylesheet" href="../static/styles/search.css">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="apple-touch-icon" sizes="180x180" href="../static/images/apple-touch-icon.png">
+	    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon-32x32.png">
+	    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
         {% if position == 'Admin' %}
             <script src="../static/scripts/create_user.js" defer></script>
             <script src="../static/scripts/search_user.js" defer></script>

@@ -7,11 +7,16 @@ form input, form select{
 	display: block;
 }
 
+* {
+    /* Change your font family */
+    font-family: sans-serif;
+}
+
 #signup {
 	text-decoration: none;
 	color: #0B2154;
 }
-#signbtn, #add {
+#signbtn, #add, #login-accounts input {
 	color: #fff;
 	background-color: #0B2154;
 	width: 150px;
@@ -27,11 +32,23 @@ select {
 	height: 300px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	border: #0B2154 solid;
-	margin: 150px auto;
+	margin: 80px auto;
 	text-align: center;
+}
+
+#login-accounts  #login {
+	height: 150px;
 }
 
 #login h1 {
 	color: #0B2154;
 }
 
+
+/* Media Query for Desktop Viewport */ 
+@media screen and (min-width: 700px), print {
+	#login-accounts {
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+	}
+}
