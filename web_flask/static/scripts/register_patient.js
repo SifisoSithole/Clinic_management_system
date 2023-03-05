@@ -1,6 +1,6 @@
 const form = document.getElementById("register_patient");
 // Listen for the form's submit event
-form.addEventListener('submit', function(event) {
+form.addEventListener('click', function(event) {
 
     // Stop the form from submitting normally
     event.preventDefault();
@@ -29,10 +29,10 @@ form.addEventListener('submit', function(event) {
             alert("Email address already registered")
         } else if (response.result === 'failed') {
             alert("Failed to create User, please try again")
-        } //else {
-            //alert("User created")
-            //window.location.reload();
-        //}
+        } else {
+            alert("User created")
+            window.location.reload();
+        }
         },
         error: function(xhr, status, error) {
         // Handle an error response from the server
