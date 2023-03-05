@@ -36,8 +36,8 @@ form.addEventListener('submit', function(event) {
         } else if (response.result === 'failed') {
             alert("Failed to create User, please try again")
         } else {
-            window.location.reload();
             alert("User created")
+            window.location.reload();
         }
         },
         error: function(xhr, status, error) {
