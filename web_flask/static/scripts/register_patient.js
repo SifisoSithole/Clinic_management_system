@@ -2,13 +2,6 @@ const form = document.getElementById("register_patient");
 // Listen for the form's submit event
 form.addEventListener('submit', function(event) {
 
-    // validate form fields
-    let add_user = popupWindow.document.getElementById("add");
-    add_user.addEventListener("click", validateName);
-    add_user.addEventListener("click", validateLastName);
-    add_user.addEventListener("click", validateEmail);
-    add_user.addEventListener("click", validatePassword);
-
     // Stop the form from submitting normally
     event.preventDefault();
 
