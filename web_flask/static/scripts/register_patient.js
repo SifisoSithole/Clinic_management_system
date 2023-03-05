@@ -36,10 +36,10 @@ form.addEventListener('submit', function(event) {
             alert("Email address already registered")
         } else if (response.result === 'failed') {
             alert("Failed to create User, please try again")
-        } else {
-            alert("User created")
-            window.location.reload();
-        }
+        } //else {
+            //alert("User created")
+            //window.location.reload();
+        //}
         },
         error: function(xhr, status, error) {
         // Handle an error response from the server
