@@ -61,7 +61,7 @@ def get_medicalRecords():
 
 @accounts_app.route('/appointments', strict_slashes=False)
 def get_appointments():
-    """Get all medical records"""
+    """Get all appointment records"""
     id = request.cookies.get('id')
     session = auth(id)
     if type(session).__name__ == 'Response':
@@ -94,6 +94,7 @@ def add_appointment():
     app.end_time = app.start_time + timedelta(minutes=30)
     storage.new(app)
     storage.save()
+    storage.reload()
     return jsonify({'result': 'done'})
 
 @accounts_app.route('/add_record', methods=['POST'], strict_slashes=False)
@@ -105,13 +106,13 @@ def add_record():
         return session
     id = request.json['id']
     del request.json['id']
-    print('id:', id)
     file = MedicalRecords(**request.json)
     file.date = date.today()
     storage.new(file)
     storage.save()
     appointment = storage.get('Appointments', id)
     appointment.delete()
+    storage.reload()
     return jsonify({'result': 'done'})
 
 @accounts_app.route('/consultations', strict_slashes=False)
@@ -130,10 +131,9 @@ def get_consultations():
 def get_user(user_id):
     """Return user"""
     id = request.cookies.get('id')
-    position = request.cookies.get('position')
     session = auth(id)
-    userd = storage.get('User', user_id)
-    return jsonify(userd.to_dict())
+    user = storage.get('User', user_id)
+    return jsonify(user.to_dict())
 
 @accounts_app.route('/newUser', strict_slashes=False)
 def new_user():
@@ -175,6 +175,7 @@ def add_users():
             user = User(email=email, first_name=fName, age=age, gender=gender, last_name=lName, password=pwd, position=position)
             storage.new(user)
             user.save()
+            storage.reload()
             return jsonify(user.to_dict())
         except Exception:
             return jsonify({'result': 'failed'})   
@@ -191,6 +192,7 @@ def delete_user(cls, user_id):
     if user is None:
         return jsonify({'result': "user doesn't exist"})
     user.delete()
+    storage.reload()
     return jsonify({'result': 'deleted'})
 
 @accounts_app.route('/events', strict_slashes=False)

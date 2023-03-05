@@ -103,7 +103,6 @@ function openRecords(){
                 xhr.send(JSON.stringify(appointment_rec));
 
             })
-            console.log(appointment_rec);
 
 
         });
