@@ -25,7 +25,4 @@ def auth(id):
         return make_response(render_template('signin.html', id=5))
     elif session == 'expired':
         return make_response(render_template('signin.html', id=6))
-    position = request.cookies.get('position')
-    if session.position != position:
-        return make_response(render_template('signin.html', id=6))
     return session
