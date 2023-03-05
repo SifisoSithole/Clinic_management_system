@@ -30,6 +30,7 @@ form.addEventListener('submit', function(event) {
         method: 'POST',
         data: formData,
         success: function(response) {
+        console.log(response)
         // Handle a successful response from the server
         if (response.result === 'exists') {
             alert("Email address already registered")
