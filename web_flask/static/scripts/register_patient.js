@@ -1,6 +1,6 @@
 const form = document.getElementById("register_patient");
 // Listen for the form's submit event
-form.addEventListener('click', function(event) {
+form.addEventListener('submit', function(event) {
 
     // Stop the form from submitting normally
     event.preventDefault();
@@ -16,7 +16,6 @@ form.addEventListener('click', function(event) {
         formData[this.name] = this.value;
     });
 
-    popupWindow.close();
     // Use jQuery's $.ajax() method to send the data to the server
     $.ajax({
         url: 'https://www.healtheasehub.live/signup',
