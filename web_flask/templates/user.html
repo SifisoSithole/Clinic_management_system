@@ -33,24 +33,24 @@
             <nav class="mobile-nav">
                 <div id="menu-links">
                     {% if position != 'Patient' %}
-                        <a href="https://www.healtheasehub.live/accounts/schedule"><p>Schedule</p></a>
+                        <a href="http://localhost/accounts/schedule"><p>Schedule</p></a>
                     {% endif %}
                     {% if position == 'Admin' %}
-                        <a href="https://www.healtheasehub.live/accounts/users"><p>User</p></a>
+                        <a href="http://localhost/accounts/users"><p>User</p></a>
                     {% endif %}
-                    <a href="https://www.healtheasehub.live/accounts/medical_records"><p>Medical Records</p></a>
-                    <a href="https://www.healtheasehub.live/accounts/appointments"><p>Appointments</p></a>
+                    <a href="http://localhost/accounts/medical_records"><p>Medical Records</p></a>
+                    <a href="http://localhost/accounts/appointments"><p>Appointments</p></a>
                     {% if position == 'Patient' %}
-                        <a href="https://www.healtheasehub.live/accounts/users"><p>Make Appointment</p></a>
+                        <a href="http://localhost/accounts/users"><p>Make Appointment</p></a>
                     {% endif %}
                     {% if position == 'Receptionist' %}
-                        <a href="https://www.healtheasehub.live/accounts/users"><p>Make Appointment</p></a>
-                        <a href="https://www.healtheasehub.live/accounts/register_patient"><p>Register Patient</p></a>
+                        <a href="http://localhost/accounts/users"><p>Make Appointment</p></a>
+                        <a href="http://localhost/accounts/register_patient"><p>Register Patient</p></a>
                     {% endif %}
                     {% if position in ['Doctor'] %}
-                        <a href="https://www.healtheasehub.live/accounts/consultations"><p>Consult</p></a>
+                        <a href="http://localhost/accounts/consultations"><p>Consult</p></a>
                     {% endif %}
-                    <a href="https://www.healtheasehub.live/logout" class="logout"><p>Logout</p></a>
+                    <a href="http://localhost/logout" class="logout"><p>Logout</p></a>
                 </div>
 
                 <a class="menu-icon">
@@ -61,31 +61,31 @@
                 <img src="../static/images/icons-user.png" alt="">
                 <h3>{{ position }}</h3>
                 {% if position != 'Patient' %}
-                    <a href="https://www.healtheasehub.live/accounts/schedule"><p>Schedule</p></a>
+                    <a href="http://localhost/accounts/schedule"><p>Schedule</p></a>
                 {% endif %}
                 {% if position == 'Admin' %}
-                    <a href="https://www.healtheasehub.live/accounts/users"><p>User</p></a>
+                    <a href="http://localhost/accounts/users"><p>User</p></a>
                 {% endif %}
                 {% if position == 'Receptionist' %}
-                    <a href="https://www.healtheasehub.live/accounts/users"><p>Make Appointment</p></a>
-                    <a href="https://www.healtheasehub.live/accounts/register_patient"><p>Register Patient</p></a>
+                    <a href="http://localhost/accounts/users"><p>Make Appointment</p></a>
+                    <a href="http://localhost/accounts/register_patient"><p>Register Patient</p></a>
                 {% endif %}
                 {% if position == 'Doctor' or position == 'Admin' or position == 'Patient' %}
-                    <a href="https://www.healtheasehub.live/accounts/medical_records"><p>Medical Records</p></a>
+                    <a href="http://localhost/accounts/medical_records"><p>Medical Records</p></a>
                 {% endif %}
-                <a href="https://www.healtheasehub.live/accounts/appointments"><p>Appointments</p></a>
+                <a href="http://localhost/accounts/appointments"><p>Appointments</p></a>
                 {% if position == 'Patient' %}
-                    <a href="https://www.healtheasehub.live/accounts/users"><p>Make Appointment</p></a>
+                    <a href="http://localhost/accounts/users"><p>Make Appointment</p></a>
                 {% endif %}
                 {% if position in ['Doctor'] %}
-                    <a href="https://www.healtheasehub.live/accounts/consultations"><p>Consultations</p></a>
+                    <a href="http://localhost/accounts/consultations"><p>Consultations</p></a>
                 {% endif %}
             </nav>
         </div>
         <div id="head">
             <header>
                 <p id="user-info">{{ first_name }} {{ last_name }}&#9662;</p>
-                <a href="https://www.healtheasehub.live/logout" id="logout-btn" style="display: none;">Logout</a>
+                <a href="http://localhost/logout" id="logout-btn" style="display: none;">Logout</a>
                 <script defer>
                     document.getElementById('user-info').addEventListener('click', () => {
                         let logout = document.getElementById('logout-btn');

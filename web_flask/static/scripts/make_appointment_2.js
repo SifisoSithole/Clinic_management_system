@@ -1,7 +1,7 @@
 let appointment_rec = {}
 document.addEventListener('DOMContentLoaded', function() {
     $.ajax({
-        url: 'https://www.healtheasehub.live/search/User/Doctor',
+        url: 'http://localhost/search/User/Doctor',
         method: 'GET',
         success: (response) => {
             console.log(response)
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     let id = document.getElementById('select-date').className;
     $.ajax({
-        url: 'https://www.healtheasehub.live/search/User/' + id,
+        url: 'http://localhost/search/User/' + id,
         method: 'GET',
         success: (response) => {
             appointment_rec.first_name = response[0].first_name;
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('doctors').addEventListener('change', (event) => {
         appointment_rec.doctor_id = event.target.value;
         $.ajax({
-            url: 'https://www.healtheasehub.live/search/Appointments/' + event.target.value,
+            url: 'http://localhost/search/Appointments/' + event.target.value,
             method: 'GET',
             success: (response) => {
                 appointment_rec.doctor = response[0].doctor;
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementsByClassName('back-button')[0].addEventListener('click', () => {
 
                 const xhr = new XMLHttpRequest();
-                const url = 'https://www.healtheasehub.live/accounts/add_appointment';
+                const url = 'http://localhost/accounts/add_appointment';
 
                 xhr.open('POST', url);
                 xhr.setRequestHeader('Content-Type', 'application/json');

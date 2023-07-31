@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('img').click((e) => {
         let image = e.currentTarget.id
         $.ajax({
-        url: "https://www.healtheasehub.live/accounts/remove/User/" + image,
+        url: "http://localhost/accounts/remove/User/" + image,
         method: 'DELETE',
         success: (response) => {
             if (response.result === 'deleted') {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload();
         }
         $.ajax({
-            url: 'https://www.healtheasehub.live/search/User/' + string,
+            url: 'http://localhost/search/User/' + string,
             method: 'GET',
             success: (response) => {
                 let headers;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     image.id = response[i].id;
                     image.addEventListener('click', () => {
                         $.ajax({
-                        url: "https://www.healtheasehub.live/accounts/remove/User/" + image.id,
+                        url: "http://localhost/accounts/remove/User/" + image.id,
                         method: 'DELETE',
                         success: (response) => {
                             if (response.result === 'deleted') {

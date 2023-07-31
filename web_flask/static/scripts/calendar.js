@@ -1,4 +1,4 @@
-const url = "https://www.healtheasehub.live"
+const url = "http://localhost"
 
 function getRandomColor() {
   // Generate a random RGB color value
@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let search;
   if (position === 'Admin' || position === 'Receptionist') {
-    search = 'https://www.healtheasehub.live/accounts/events';
+    search = 'http://localhost/accounts/events';
   } else {
-    search = 'https://www.healtheasehub.live/search/Appointments/' + id;
+    search = 'http://localhost/search/Appointments/' + id;
   }
   $.ajax({
       url: search,
