@@ -1,4 +1,4 @@
-const url = "http://localhost"
+const url = "http://localhost:5000"
 
 function getRandomColor() {
   // Generate a random RGB color value
@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let search;
   if (position === 'Admin' || position === 'Receptionist') {
-    search = 'http://localhost/accounts/events';
+    search = 'http://localhost:5000/accounts/events';
   } else {
-    search = 'http://localhost/search/Appointments/' + id;
+    search = 'http://localhost:5000/search/Appointments/' + id;
   }
   $.ajax({
       url: search,

@@ -1,5 +1,5 @@
 let popupWindow;
-const url = "http://localhost/"
+const url = "http://localhost:5000/"
 
 // Validate name field
 function validateName() {

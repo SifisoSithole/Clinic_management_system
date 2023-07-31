@@ -18,7 +18,7 @@ form.addEventListener('submit', function(event) {
 
     // Use jQuery's $.ajax() method to send the data to the server
     $.ajax({
-        url: 'http://localhost/signup',
+        url: 'http://localhost:5000/signup',
         method: 'POST',
         data: formData,
         success: function(response) {
